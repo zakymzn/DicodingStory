@@ -36,13 +36,13 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_title_welcome"
+        android:id="@+id/tv_welcome_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/text_title_welcome"
+        android:text="@string/text_welcome_title"
         android:textSize="20sp"
         android:textStyle="bold"
         android:alpha="0"
@@ -53,19 +53,19 @@
         tools:alpha="100"/>
 
     <TextView
-        android:id="@+id/tv_desc_welcome"
+        android:id="@+id/tv_welcome_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/text_desc_welcome"
+        android:text="@string/text_welcome_desc"
         android:textSize="14sp"
         android:alpha="0"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_welcome"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome_title"
         tools:alpha="100"/>
 
     <Button
@@ -75,12 +75,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/navy"
-        android:text="@string/text_login"
+        android:text="@string/login"
         android:alpha="0"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_desc_welcome"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome_desc"
         tools:alpha="100"/>
 
     <Button
@@ -90,12 +89,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/navy"
-        android:text="@string/text_register"
+        android:text="@string/register"
         android:alpha="0"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tv_desc_welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome_desc"
         tools:alpha="100"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
