@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Dicoding Story</string>
-    <string name="text_title_welcome">Selamat datang di Dicoding Story!</string>
-    <string name="text_desc_welcome">Bagikan keseruanmu saat belajar di Dicoding bersama teman-teman. Siap untuk membagikan ceritamu?</string>
-    <string name="text_login">Login</string>
-    <string name="text_register">Register</string>
+    <string name="text_welcome_title">Selamat datang di Dicoding Story!</string>
+    <string name="text_welcome_desc">Bagikan keseruanmu saat belajar di Dicoding bersama teman-teman!</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="text_login_title">Sudah siap untuk berbagi cerita?</string>
+    <string name="text_login_message">Login dulu yuk!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
