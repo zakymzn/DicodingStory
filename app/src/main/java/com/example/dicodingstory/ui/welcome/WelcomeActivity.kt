@@ -1,4 +1,4 @@
-package com.example.dicodingstory.view.welcome
+package com.example.dicodingstory.ui.welcome
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
