@@ -2,5 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="navy">#2D3D4F</color>
+    <color name="navy">#2D3D50</color>
+    <color name="light_navy">#055472</color>
+<!--    <color name="dark_teal">#FF018786</color>-->
+    <color name="teal">#11C5C6</color>
+    <color name="light_teal">#63C4AE</color>
+    <color name="soft_red">#FF5483</color>
+    <color name="soft_blue">#60A5FA</color>
+<!--    <color name="navy">#033E5E</color>-->
 </resources>
