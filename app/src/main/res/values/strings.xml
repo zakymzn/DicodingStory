@@ -8,4 +8,7 @@
     <string name="text_login_message">Login dulu yuk!</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="text_register_title">Isi data-data di bawah ini dengan lengkap ya</string>
+    <string name="name">Nama</string>
+    <string name="text_hint_name">Masukkan nama lengkap</string>
 </resources>
