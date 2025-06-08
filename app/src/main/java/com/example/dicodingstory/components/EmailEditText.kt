@@ -26,10 +26,10 @@ class EmailEditText @JvmOverloads constructor(
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if (!s.isNullOrEmpty() && !isValidEmail(s)) {
-                    setError("Email tidak valid")
+                error = if (!s.isNullOrEmpty() && !isValidEmail(s)) {
+                    "Email tidak valid"
                 } else {
-                    error = null
+                    null
                 }
             }
 
