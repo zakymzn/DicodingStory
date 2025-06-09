@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.dicodingstory.R
 import com.example.dicodingstory.databinding.ActivityWelcomeBinding
 import com.example.dicodingstory.ui.login.LoginActivity
+import com.example.dicodingstory.ui.register.RegisterActivity
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -49,7 +50,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         binding.buttonRegister.setOnClickListener {
-
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
