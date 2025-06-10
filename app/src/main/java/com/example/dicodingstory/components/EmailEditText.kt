@@ -19,7 +19,17 @@ class EmailEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : AppCompatEditText(context, attrs) {
 
+    private lateinit var lockIcon: Drawable
+
     init {
+        hint = "Masukkan email Anda"
+        textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+        inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+        compoundDrawablePadding = 40
+        background = ContextCompat.getDrawable(context, R.drawable.custom_edit_text_background)
+        lockIcon = ContextCompat.getDrawable(context, R.drawable.baseline_email_24) as Drawable
+        setButtonDrawables(startOfTheText = lockIcon)
+
         addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
@@ -41,12 +51,6 @@ class EmailEditText @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        hint = "Masukkan email Anda"
-        setButtonDrawables(startOfTheText = ContextCompat.getDrawable(context, R.drawable.baseline_email_24) as Drawable)
-        textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-        inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-        compoundDrawablePadding = 40
-        background = ContextCompat.getDrawable(context, R.drawable.custom_edit_text_background)
     }
 
     private fun setButtonDrawables(
