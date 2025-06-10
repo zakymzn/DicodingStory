@@ -16,11 +16,8 @@ data class StoryDetailResponse(
 
 data class Story(
 
-	@field:SerializedName("photoUrl")
-	val photoUrl: String? = null,
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
+	@field:SerializedName("id")
+	val id: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,
@@ -28,12 +25,15 @@ data class Story(
 	@field:SerializedName("description")
 	val description: String? = null,
 
-	@field:SerializedName("lon")
-	val lon: Any? = null,
+	@field:SerializedName("photoUrl")
+	val photoUrl: String? = null,
 
-	@field:SerializedName("id")
-	val id: String? = null,
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
 
 	@field:SerializedName("lat")
-	val lat: Any? = null
+	val lat: Float? = null,
+
+	@field:SerializedName("lon")
+	val lon: Float? = null
 )
