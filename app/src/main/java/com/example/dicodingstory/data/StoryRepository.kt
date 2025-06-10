@@ -38,4 +38,17 @@ class StoryRepository private constructor(
         val localData: LiveData<Result<List<StoryEntity>>> = storyDao.getAllStories().map { Result.Success(it) }
         emitSource(localData)
     }
+
+    companion object {
+        @Volatile
+        private var instance: StoryRepository? = null
+        fun getInstance(
+            apiService: ApiService,
+            storyDao: StoryDao,
+            appExecutors: AppExecutors
+        ): StoryRepository =
+            instance ?: synchronized(this) {
+                instance ?: StoryRepository(apiService, storyDao, appExecutors)
+            }.also { instance = it }
+    }
 }
