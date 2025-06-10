@@ -61,6 +61,7 @@ dependencies {
 
     // livedata dan room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
     ksp(libs.room.compiler)
 
     testImplementation(libs.junit)

@@ -21,7 +21,7 @@ class StoryRepository private constructor(
             val stories = response.listStory
             val storyList = stories.map { story ->
                 StoryEntity(
-                    story.id,
+                    story.id!!,
                     story.name,
                     story.description,
                     story.photoUrl,
