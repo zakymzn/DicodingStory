@@ -1,6 +1,6 @@
 package com.example.dicodingstory.data.remote.retrofit
 
-import com.example.dicodingstory.data.remote.response.StoryBasicResponse
+import com.example.dicodingstory.data.remote.response.StoryErrorResponse
 import com.example.dicodingstory.data.remote.response.StoryDetailResponse
 import com.example.dicodingstory.data.remote.response.StoryListResponse
 import com.example.dicodingstory.data.remote.response.StoryLoginResponse
@@ -15,7 +15,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-    ): StoryBasicResponse
+    ): StoryErrorResponse
 
     @FormUrlEncoded
     @POST("login")
@@ -27,16 +27,14 @@ interface ApiService {
     @Multipart
     @POST("stories")
     suspend fun addNewStory(
-        @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
         @Part("lat") lat: RequestBody? = null,
         @Part("lon") lon: RequestBody? = null,
-    ): StoryBasicResponse
+    ): StoryErrorResponse
 
     @GET("stories")
     suspend fun getAllStories(
-        @Header("Authorization") token: String,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("location") location: Boolean = false,
@@ -44,7 +42,6 @@ interface ApiService {
 
     @GET("stories/{id}")
     suspend fun getStoryDetail(
-        @Header("Authorization") token: String,
         @Path("id") id: Int,
     ): StoryDetailResponse
 }
