@@ -5,13 +5,19 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.dicodingstory.R
+import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityRegisterBinding
+import com.example.dicodingstory.ui.login.LoginActivity
 import com.example.dicodingstory.ui.main.MainActivity
+import com.google.android.material.snackbar.Snackbar
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -21,8 +27,63 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setupAction()
+        
+        val edRegisterName = binding.edRegisterName
+        val edRegisterEmail = binding.edRegisterEmail
+        val edRegisterPassword = binding.edRegisterPassword
+        val buttonRegister = binding.buttonRegister
+        val pbRegister = binding.pbRegister
+        
+        val registerViewModelFactory: RegisterViewModelFactory = RegisterViewModelFactory.getInstance(this)
+        val registerViewModel: RegisterViewModel by viewModels {
+            registerViewModelFactory
+        }
+        
+        buttonRegister.setOnClickListener { view ->
+            val name = edRegisterName.text.toString()
+            val email = edRegisterEmail.text.toString()
+            val password = edRegisterPassword.text.toString()
+            
+            registerViewModel.registerAccount(name, email, password).observe(this) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            pbRegister.visibility = View.VISIBLE
+                        }
+                        
+                        is Result.Success -> {
+                            pbRegister.visibility = View.GONE
+                            val response = result.data
+                            
+                            if (response.error == false) {
+                                AlertDialog.Builder(this).apply {
+                                    setTitle("Pendaftaran berhasil")
+                                    setMessage("Silahkan masuk menggunakan email dan password yang sudah dibuat")
+                                    setPositiveButton("Lanjut") { _, _, ->
+                                        val intent = Intent(context, LoginActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    setNegativeButton("Batal") { _, _, -> }
+                                    create()
+                                    show()
+                                }
+                            } else {
+                                Snackbar.make(view, "${response.message}", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null)
+                                    .show()
+                            }
+                        }
+                        
+                        is Result.Error -> {
+                            pbRegister.visibility = View.GONE
+                            Toast.makeText(this, "Error : ${result.error}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
+        
         playAnimation()
     }
 

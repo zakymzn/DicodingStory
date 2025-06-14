@@ -50,7 +50,7 @@ class StoryRepository private constructor(
             )
             emit(Result.Success(result))
         } catch (e: Exception) {
-            Log.d("StoryRepository", "RegisterAccount: ${e.message.toString()}")
+            Log.d("StoryRepository", "registerAccount: ${e.message.toString()}")
             emit(Result.Error(e.message.toString()))
         }
     }
