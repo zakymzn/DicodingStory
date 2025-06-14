@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityLoginBinding
 import com.example.dicodingstory.ui.main.MainActivity
+import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
             loginViewModelFactory
         }
 
-        buttonLogin.setOnClickListener {
+        buttonLogin.setOnClickListener { view ->
             val email = edLoginEmail.text.toString()
             val password = edLoginPassword.text.toString()
 
@@ -54,7 +55,9 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 finish()
                             } else {
-                                Toast.makeText(this, "${response.message}", Toast.LENGTH_SHORT).show()
+                                Snackbar.make(view, "${response.message}", Snackbar.LENGTH_LONG)
+                                    .setAction("OK", null)
+                                    .show()
                             }
                         }
 
