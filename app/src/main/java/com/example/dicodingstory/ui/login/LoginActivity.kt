@@ -5,11 +5,10 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.dicodingstory.R
+import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityLoginBinding
 import com.example.dicodingstory.ui.main.MainActivity
 
@@ -22,17 +21,53 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupAction()
-        playAnimation()
-    }
+        val edLoginEmail = binding.edLoginEmail
+        val edLoginPassword = binding.edLoginPassword
+        val buttonLogin = binding.buttonLogin
+        val cpiLogin = binding.cpiLogin
 
-    private fun setupAction() {
-        binding.buttonLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
+        val loginViewModelFactory: LoginViewModelFactory = LoginViewModelFactory.getInstance(this)
+        val loginViewModel: LoginViewModel by viewModels {
+            loginViewModelFactory
         }
+
+        buttonLogin.setOnClickListener {
+            val email = edLoginEmail.text.toString()
+            val password = edLoginPassword.text.toString()
+
+            loginViewModel.loginAccount(email, password).observe(this) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            cpiLogin.visibility = View.VISIBLE
+                        }
+
+                        is Result.Success -> {
+                            cpiLogin.visibility = View.GONE
+                            val response = result.data
+
+                            if (response.error == false) {
+                                Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT)
+                                    .show()
+                                val intent = Intent(this, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this, "${response.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        is Result.Error -> {
+                            cpiLogin.visibility = View.GONE
+                            Toast.makeText(this, "Error : ${result.error}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
+
+        playAnimation()
     }
 
     private fun playAnimation() {

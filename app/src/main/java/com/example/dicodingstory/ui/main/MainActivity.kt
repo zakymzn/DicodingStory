@@ -6,9 +6,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.dicodingstory.R
 import com.example.dicodingstory.databinding.ActivityMainBinding
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
+import com.example.dicodingstory.utils.SessionManager
+import com.example.dicodingstory.utils.dataStore
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +23,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startActivity(Intent(this, WelcomeActivity::class.java))
-        finish()
+        val sessionManager = SessionManager.getInstance(applicationContext.dataStore)
+
+        lifecycleScope.launch {
+            sessionManager.getSessionToken().collect { token ->
+                if (token.isNullOrEmpty()) {
+                    startActivity(Intent(this@MainActivity, WelcomeActivity::class.java))
+                }
+            }
+        }
     }
 }
