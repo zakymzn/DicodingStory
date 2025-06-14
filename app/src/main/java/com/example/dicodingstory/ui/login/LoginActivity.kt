@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         val edLoginEmail = binding.edLoginEmail
         val edLoginPassword = binding.edLoginPassword
         val buttonLogin = binding.buttonLogin
-        val cpiLogin = binding.cpiLogin
+        val pbLogin = binding.pbLogin
 
         val loginViewModelFactory: LoginViewModelFactory = LoginViewModelFactory.getInstance(this)
         val loginViewModel: LoginViewModel by viewModels {
@@ -39,11 +39,11 @@ class LoginActivity : AppCompatActivity() {
                 if (result != null) {
                     when (result) {
                         is Result.Loading -> {
-                            cpiLogin.visibility = View.VISIBLE
+                            pbLogin.visibility = View.VISIBLE
                         }
 
                         is Result.Success -> {
-                            cpiLogin.visibility = View.GONE
+                            pbLogin.visibility = View.GONE
                             val response = result.data
 
                             if (response.error == false) {
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                         }
 
                         is Result.Error -> {
-                            cpiLogin.visibility = View.GONE
+                            pbLogin.visibility = View.GONE
                             Toast.makeText(this, "Error : ${result.error}", Toast.LENGTH_SHORT).show()
                         }
                     }
