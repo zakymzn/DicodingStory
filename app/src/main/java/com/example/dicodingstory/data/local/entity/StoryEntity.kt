@@ -21,8 +21,8 @@ data class StoryEntity(
     var createdAt: String? = null,
 
     @ColumnInfo(name = "lat")
-    var lat: Float? = null,
+    var lat: Double? = null,
 
     @ColumnInfo(name = "lon")
-    var lon: Float? = null
+    var lon: Double? = null
 )
