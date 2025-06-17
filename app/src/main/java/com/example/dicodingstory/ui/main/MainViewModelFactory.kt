@@ -1,0 +1,24 @@
+package com.example.dicodingstory.ui.main
+
+import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.dicodingstory.data.StoryRepository
+import com.example.dicodingstory.di.Injection
+
+class MainViewModelFactory private constructor(private val storyRepository: StoryRepository) : ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(storyRepository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+    }
+
+    companion object {
+        @Volatile
+        private var instance: MainViewModelFactory? = null
+        fun getInstance(context: Context): MainViewModelFactory = instance ?: synchronized(this) {
+            instance ?: MainViewModelFactory(Injection.provideRepository(context))
+        }.also { instance = it }
+    }
+}

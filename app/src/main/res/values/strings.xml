@@ -11,4 +11,8 @@
     <string name="text_register_title">Isi data-data di bawah ini dengan lengkap ya</string>
     <string name="name">Nama</string>
     <string name="text_hint_name">Masukkan nama lengkap</string>
+    <string name="logout">Logout</string>
+    <string name="text_add_new_story">Buat story baru</string>
+    <string name="text_account_name">Nama Akun Pengguna</string>
+    <string name="text_post_time">Waktu Post</string>
 </resources>
