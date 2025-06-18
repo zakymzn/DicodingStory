@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -45,7 +46,9 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             sessionManager.getSessionToken().collect { token ->
                 if (token.isNullOrEmpty()) {
-                    startActivity(Intent(this@MainActivity, WelcomeActivity::class.java))
+                    val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
                 }
             }
         }
@@ -53,12 +56,18 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_logout -> {
-                    lifecycleScope.launch {
-                        sessionManager.clearSessionToken()
+                    AlertDialog.Builder(this@MainActivity).apply {
+                        setTitle("Logout")
+                        setMessage("Apakah kamu yakin ingin logout?")
+                        setPositiveButton("Keluar") { _, _, ->
+                            lifecycleScope.launch {
+                                sessionManager.clearSessionToken()
+                            }
+                        }
+                        setNegativeButton("Batal") { _, _, -> }
+                        create()
+                        show()
                     }
-                    val intent = Intent(this, WelcomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
                     true
                 }
                 else -> false
