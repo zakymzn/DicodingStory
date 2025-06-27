@@ -12,6 +12,9 @@ interface StoryDao {
     @Query("SELECT * FROM story")
     fun getAllStories(): LiveData<List<StoryEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertStory(event: List<StoryEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertStory(story: List<StoryEntity>)
+
+    @Query("DELETE FROM story")
+    suspend fun deleteAll()
 }

@@ -15,4 +15,5 @@
     <string name="text_add_new_story">Buat story baru</string>
     <string name="text_account_name">Nama Akun Pengguna</string>
     <string name="text_post_time">Waktu Post</string>
+    <string name="text_content_description">Deskripsi konten</string>
 </resources>

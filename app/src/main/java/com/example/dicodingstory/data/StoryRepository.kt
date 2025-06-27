@@ -11,6 +11,9 @@ import com.example.dicodingstory.data.remote.response.StoryLoginResponse
 import com.example.dicodingstory.data.remote.retrofit.ApiService
 import com.example.dicodingstory.utils.AppExecutors
 import com.example.dicodingstory.utils.SessionManager
+import com.google.gson.Gson
+import kotlinx.coroutines.flow.first
+import retrofit2.HttpException
 
 class StoryRepository private constructor(
     private val apiService: ApiService,
@@ -22,19 +25,20 @@ class StoryRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.loginAccount(email, password)
-            val error = response.error
-            val message = response.message
             val loginResult = response.loginResult
-            val result = StoryLoginResponse(
-                loginResult,
-                error,
-                message
-            )
-            session.saveSessionToken(loginResult?.token!!)
-            emit(Result.Success(result))
-        } catch (e: Exception) {
-            Log.d("StoryRepository", "loginAccount: ${e.message.toString()}")
-            emit(Result.Error(e.message.toString()))
+
+            if (response.error == true || loginResult?.token == null) {
+                emit(Result.Error("Login gagal"))
+            } else {
+                session.saveSessionToken(loginResult.token)
+                emit(Result.Success(response))
+            }
+        } catch (e: HttpException) {
+            Log.e("StoryRepository", "loginAccount: ${e.message.toString()}")
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, StoryErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
         }
     }
 
@@ -49,14 +53,24 @@ class StoryRepository private constructor(
                 message
             )
             emit(Result.Success(result))
-        } catch (e: Exception) {
-            Log.d("StoryRepository", "registerAccount: ${e.message.toString()}")
-            emit(Result.Error(e.message.toString()))
+        } catch (e: HttpException) {
+            Log.e("StoryRepository", "registerAccount: ${e.message.toString()}")
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, StoryErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
         }
     }
 
     fun getAllStories(): LiveData<Result<List<StoryEntity>>> = liveData {
         emit(Result.Loading)
+        val token = session.getSessionToken().first()
+
+        if (token.isNullOrEmpty()) {
+            emit(Result.Error("Token tidak ditemukan"))
+            return@liveData
+        }
+
         try {
             val response = apiService.getAllStories()
             val stories = response.listStory
@@ -71,10 +85,14 @@ class StoryRepository private constructor(
                     story.lon
                 )
             }
+            storyDao.deleteAll()
             storyDao.insertStory(storyList)
-        } catch (e: Exception) {
-            Log.d("StoryRepository", "getAllStories: ${e.message.toString()}")
-            emit(Result.Error(e.message.toString()))
+        } catch (e: HttpException) {
+            Log.e("StoryRepository", "getAllStories: ${e.message.toString()}")
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, StoryErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
         }
         val localData: LiveData<Result<List<StoryEntity>>> = storyDao.getAllStories().map { Result.Success(it) }
         emitSource(localData)

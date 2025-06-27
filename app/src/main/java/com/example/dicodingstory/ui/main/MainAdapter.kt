@@ -1,5 +1,6 @@
 package com.example.dicodingstory.ui.main
 
+import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dicodingstory.data.local.entity.StoryEntity
 import com.example.dicodingstory.databinding.ItemStoryBinding
+import com.example.dicodingstory.ui.detail.DetailActivity
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -56,6 +58,11 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
                     "${ChronoUnit.SECONDS.between(parsedDateTime, today)} detik yang lalu"
                 } else {
                     "Baru saja"
+                }
+                itemStory.setOnClickListener {
+                    val intent = Intent(this@MyViewHolder.itemView.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_STORY, story)
+                    this@MyViewHolder.itemView.context.startActivity(intent)
                 }
             }
         }

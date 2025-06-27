@@ -1,8 +1,11 @@
 package com.example.dicodingstory.data.local.entity
 
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "story")
+@Parcelize
 data class StoryEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
@@ -25,4 +28,4 @@ data class StoryEntity(
 
     @ColumnInfo(name = "lon")
     var lon: Double? = null
-)
+) : Parcelable

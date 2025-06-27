@@ -56,18 +56,11 @@ class RegisterActivity : AppCompatActivity() {
                             val response = result.data
                             
                             if (response.error == false) {
-                                AlertDialog.Builder(this).apply {
-                                    setTitle("Pendaftaran berhasil")
-                                    setMessage("Silahkan masuk menggunakan email dan password yang sudah dibuat")
-                                    setPositiveButton("Lanjut") { _, _, ->
-                                        val intent = Intent(context, LoginActivity::class.java)
-                                        startActivity(intent)
-                                        finish()
-                                    }
-                                    setNegativeButton("Batal") { _, _, -> }
-                                    create()
-                                    show()
-                                }
+                                Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
+                                finish()
                             } else {
                                 Snackbar.make(view, "${response.message}", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null)
@@ -87,17 +80,8 @@ class RegisterActivity : AppCompatActivity() {
         playAnimation()
     }
 
-    private fun setupAction() {
-        binding.buttonRegister.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
-        }
-    }
-
     private fun playAnimation() {
-        ObjectAnimator.ofFloat(binding.ivRegister, View.ALPHA, 1f).apply {
+        ObjectAnimator.ofFloat(binding.ivRegister, View.TRANSLATION_X, -30f, 30f).apply {
             duration = 6000
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE

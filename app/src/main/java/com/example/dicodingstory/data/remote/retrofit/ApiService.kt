@@ -1,7 +1,6 @@
 package com.example.dicodingstory.data.remote.retrofit
 
 import com.example.dicodingstory.data.remote.response.StoryErrorResponse
-import com.example.dicodingstory.data.remote.response.StoryDetailResponse
 import com.example.dicodingstory.data.remote.response.StoryListResponse
 import com.example.dicodingstory.data.remote.response.StoryLoginResponse
 import okhttp3.MultipartBody
@@ -39,9 +38,4 @@ interface ApiService {
         @Query("size") size: Int? = null,
         @Query("location") location: Boolean = false,
     ): StoryListResponse
-
-    @GET("stories/{id}")
-    suspend fun getStoryDetail(
-        @Path("id") id: Int,
-    ): StoryDetailResponse
 }
