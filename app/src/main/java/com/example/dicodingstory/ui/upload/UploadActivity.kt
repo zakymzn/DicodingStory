@@ -24,10 +24,16 @@ class UploadActivity : AppCompatActivity() {
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.apply {
-            btGallery.setOnClickListener { startGallery() }
-            btCamera.setOnClickListener {  }
+        val toolbar = binding.materialToolbar
+        val btGallery = binding.btGallery
+        val btCamera = binding.btCamera
+
+        toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
+
+        btGallery.setOnClickListener { startGallery() }
+        btCamera.setOnClickListener {  }
     }
 
     private fun startGallery() {
