@@ -120,7 +120,6 @@ class MainActivity : AppCompatActivity() {
         fabAddNewStory.setOnClickListener {
             val intent = Intent(this, UploadActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }
