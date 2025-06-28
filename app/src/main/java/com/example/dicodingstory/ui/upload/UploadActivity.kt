@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.dicodingstory.R
 import com.example.dicodingstory.databinding.ActivityUploadBinding
+import com.example.dicodingstory.utils.getImageUri
 
 class UploadActivity : AppCompatActivity() {
 
@@ -33,7 +34,7 @@ class UploadActivity : AppCompatActivity() {
         }
 
         btGallery.setOnClickListener { startGallery() }
-        btCamera.setOnClickListener {  }
+        btCamera.setOnClickListener { startCamera() }
     }
 
     private fun startGallery() {
@@ -48,6 +49,21 @@ class UploadActivity : AppCompatActivity() {
             showImage()
         } else {
             Log.d("Photo Picker", "No media selected")
+        }
+    }
+
+    private fun startCamera() {
+        currentImageUri = getImageUri(this)
+        launcherIntentCamera.launch(currentImageUri!!)
+    }
+
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        if (isSuccess) {
+            showImage()
+        } else {
+            currentImageUri = null
         }
     }
 

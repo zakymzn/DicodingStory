@@ -16,4 +16,8 @@
     <string name="text_account_name">Nama Akun Pengguna</string>
     <string name="text_post_time">Waktu Post</string>
     <string name="text_content_description">Deskripsi konten</string>
+    <string name="add_description">Tambahkan deskripsi...</string>
+    <string name="gallery">Galeri</string>
+    <string name="camera">Kamera</string>
+    <string name="upload">Upload</string>
 </resources>

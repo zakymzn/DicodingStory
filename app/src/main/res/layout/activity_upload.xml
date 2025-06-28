@@ -13,10 +13,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:backgroundTint="?attr/colorPrimary">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/materialToolbar"
@@ -32,7 +29,7 @@
     <ScrollView
         android:id="@+id/sv_upload"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"
-                android:hint="Tambahkan deskripsi..."
+                android:hint="@string/add_description"
                 android:inputType="textMultiLine"
                 android:singleLine="false"
                 android:background="@android:color/transparent"
@@ -58,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Galeri"
+                android:text="@string/gallery"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ed_story_description"/>
 
@@ -67,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Kamera"
+                android:text="@string/camera"
                 app:layout_constraintStart_toEndOf="@+id/bt_gallery"
                 app:layout_constraintTop_toBottomOf="@+id/ed_story_description"/>
 
@@ -76,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 app:layout_constraintTop_toBottomOf="@+id/ed_story_description"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -88,6 +85,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/bt_gallery"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:src="@mipmap/ic_launcher"/>
 
 
