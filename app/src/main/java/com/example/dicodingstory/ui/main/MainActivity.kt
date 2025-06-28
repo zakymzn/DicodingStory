@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dicodingstory.R
 import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityMainBinding
+import com.example.dicodingstory.ui.upload.UploadActivity
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
 import com.example.dicodingstory.utils.SessionManager
 import com.example.dicodingstory.utils.dataStore
@@ -114,6 +115,12 @@ class MainActivity : AppCompatActivity() {
             finish()
             startActivity(intent)
             overridePendingTransition(0, 0)
+        }
+
+        fabAddNewStory.setOnClickListener {
+            val intent = Intent(this, UploadActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
