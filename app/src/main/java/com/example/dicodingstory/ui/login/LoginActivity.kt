@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
             loginViewModelFactory
         }
 
-        buttonLogin.setOnClickListener { view ->
+        buttonLogin.setOnClickListener {
             val email = edLoginEmail.text.toString()
             val password = edLoginPassword.text.toString()
 
@@ -54,10 +54,6 @@ class LoginActivity : AppCompatActivity() {
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                 startActivity(intent)
                                 finish()
-                            } else {
-                                Snackbar.make(view, "${response.message}", Snackbar.LENGTH_LONG)
-                                    .setAction("OK", null)
-                                    .show()
                             }
                         }
 

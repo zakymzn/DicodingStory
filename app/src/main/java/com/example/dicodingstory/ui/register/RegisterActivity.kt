@@ -39,7 +39,7 @@ class RegisterActivity : AppCompatActivity() {
             registerViewModelFactory
         }
         
-        buttonRegister.setOnClickListener { view ->
+        buttonRegister.setOnClickListener {
             val name = edRegisterName.text.toString()
             val email = edRegisterEmail.text.toString()
             val password = edRegisterPassword.text.toString()
@@ -61,10 +61,6 @@ class RegisterActivity : AppCompatActivity() {
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                 startActivity(intent)
                                 finish()
-                            } else {
-                                Snackbar.make(view, "${response.message}", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null)
-                                    .show()
                             }
                         }
                         
