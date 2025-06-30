@@ -47,6 +47,8 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
                     "${ChronoUnit.YEARS.between(parsedDateTime, today)} tahun yang lalu"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
                     "${ChronoUnit.MONTHS.between(parsedDateTime, today)} bulan yang lalu"
+                } else if (ChronoUnit.WEEKS.between(parsedDateTime, today) in 1..4) {
+                    "${ChronoUnit.WEEKS.between(parsedDateTime, today)} minggu yang lalu"
                 } else if (ChronoUnit.DAYS.between(parsedDateTime, today) in 1..30) {
                     "${ChronoUnit.DAYS.between(parsedDateTime, today)} hari yang lalu"
                 } else if (ChronoUnit.HOURS.between(parsedDateTime, today) in 1..24) {
