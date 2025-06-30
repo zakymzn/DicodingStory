@@ -64,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
                 } else if (ChronoUnit.SECONDS.between(parsedDateTime, today) in 1..60) {
                     "Diunggah ${ChronoUnit.SECONDS.between(parsedDateTime, today)} detik yang lalu"
                 } else {
-                    "Baru saja diunggah"
+                    R.string.just_uploaded.toString()
                 }
                 tvDetailDescription.text = "${story.description}"
             }

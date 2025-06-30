@@ -1,24 +1,40 @@
 <resources>
     <string name="app_name">Dicoding Story</string>
+
     <string name="text_welcome_title">Selamat datang di Dicoding Story!</string>
     <string name="text_welcome_desc">Bagikan keseruanmu saat belajar di Dicoding bersama teman-teman!</string>
+
     <string name="login">Login</string>
-    <string name="register">Register</string>
     <string name="text_login_title">Sudah siap untuk berbagi cerita?</string>
     <string name="text_login_message">Login dulu yuk!</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+
+    <string name="register">Register</string>
     <string name="text_register_title">Isi data-data di bawah ini dengan lengkap ya</string>
     <string name="name">Nama</string>
     <string name="text_hint_name">Masukkan nama lengkap</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
     <string name="logout">Logout</string>
     <string name="text_add_new_story">Buat story baru</string>
+    <string name="text_no_story">Tidak ada story hari ini. Ayo bagikan story tentang keseruanmu hari ini.</string>
+
     <string name="text_account_name">Nama Akun Pengguna</string>
     <string name="text_post_time">Waktu Post</string>
     <string name="text_content_description">Deskripsi konten</string>
+
+    <string name="just_now">Baru saja</string>
+    <string name="just_uploaded">Baru saja diunggah</string>
+    <string name="seconds_ago">detik yang lalu</string>
+    <string name="minutes_ago">menit yang lalu</string>
+    <string name="hours_ago">jam yang lalu</string>
+    <string name="days_ago">hari yang lalu</string>
+    <string name="weeks_ago">minggu yang lalu</string>
+    <string name="months_ago">bulan yang lalu</string>
+    <string name="years_ago">tahun yang lalu</string>
+
     <string name="add_description">Tambahkan deskripsi...</string>
     <string name="gallery">Galeri</string>
     <string name="camera">Kamera</string>
     <string name="upload">Upload</string>
-    <string name="text_no_story">Tidak ada story hari ini. Ayo bagikan story tentang keseruanmu hari ini.</string>
 </resources>

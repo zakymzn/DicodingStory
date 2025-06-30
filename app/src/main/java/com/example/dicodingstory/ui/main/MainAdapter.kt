@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.dicodingstory.R
 import com.example.dicodingstory.data.local.entity.StoryEntity
 import com.example.dicodingstory.databinding.ItemStoryBinding
 import com.example.dicodingstory.ui.detail.DetailActivity
@@ -44,21 +45,21 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
             binding.apply {
                 tvItemName.text = "${story.name}"
                 tvItemPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
-                    "${ChronoUnit.YEARS.between(parsedDateTime, today)} tahun yang lalu"
+                    "${ChronoUnit.YEARS.between(parsedDateTime, today)} ${R.string.years_ago}"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
-                    "${ChronoUnit.MONTHS.between(parsedDateTime, today)} bulan yang lalu"
+                    "${ChronoUnit.MONTHS.between(parsedDateTime, today)} ${R.string.months_ago}"
                 } else if (ChronoUnit.WEEKS.between(parsedDateTime, today) in 1..4) {
-                    "${ChronoUnit.WEEKS.between(parsedDateTime, today)} minggu yang lalu"
+                    "${ChronoUnit.WEEKS.between(parsedDateTime, today)} ${R.string.weeks_ago}"
                 } else if (ChronoUnit.DAYS.between(parsedDateTime, today) in 1..30) {
-                    "${ChronoUnit.DAYS.between(parsedDateTime, today)} hari yang lalu"
+                    "${ChronoUnit.DAYS.between(parsedDateTime, today)} ${R.string.days_ago}"
                 } else if (ChronoUnit.HOURS.between(parsedDateTime, today) in 1..24) {
-                    "${ChronoUnit.HOURS.between(parsedDateTime, today)} jam yang lalu"
+                    "${ChronoUnit.HOURS.between(parsedDateTime, today)} ${R.string.hours_ago}"
                 } else if (ChronoUnit.MINUTES.between(parsedDateTime, today) in 1..60) {
-                    "${ChronoUnit.MINUTES.between(parsedDateTime, today)} menit yang lalu"
+                    "${ChronoUnit.MINUTES.between(parsedDateTime, today)} ${R.string.minutes_ago}"
                 } else if (ChronoUnit.SECONDS.between(parsedDateTime, today) in 1..60) {
-                    "${ChronoUnit.SECONDS.between(parsedDateTime, today)} detik yang lalu"
+                    "${ChronoUnit.SECONDS.between(parsedDateTime, today)} ${R.string.seconds_ago}"
                 } else {
-                    "Baru saja"
+                    R.string.just_now.toString()
                 }
                 itemStory.setOnClickListener {
                     val intent = Intent(this@MyViewHolder.itemView.context, DetailActivity::class.java)
