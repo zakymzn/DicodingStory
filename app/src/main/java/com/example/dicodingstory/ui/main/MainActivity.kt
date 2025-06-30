@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menu_logout -> {
+                R.id.action_logout -> {
                     AlertDialog.Builder(this@MainActivity).apply {
                         setTitle("Logout")
                         setMessage("Apakah kamu yakin ingin logout?")

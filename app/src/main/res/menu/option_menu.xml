@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <group android:menuCategory="container">
         <item
-            android:id="@+id/menu_logout"
+            android:id="@+id/action_logout"
             android:title="@string/logout"
             android:icon="@drawable/baseline_logout_24"
             app:showAsAction="ifRoom"/>

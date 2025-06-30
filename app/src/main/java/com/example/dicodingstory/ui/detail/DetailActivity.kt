@@ -32,9 +32,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val toolbar = binding.materialToolbar
-        val tvName = binding.tvName
-        val tvPostTime = binding.tvPostTime
-        val tvDescription = binding.tvDescription
+        val tvDetailName = binding.tvDetailName
+        val tvDetailPostTime = binding.tvDetailPostTime
+        val tvDetailDescription = binding.tvDetailDescription
 
         val story = intent.getParcelableExtra<StoryEntity>(EXTRA_STORY)
 
@@ -44,12 +44,12 @@ class DetailActivity : AppCompatActivity() {
 
             Glide.with(this)
                 .load(story.photoUrl)
-                .into(binding.ivPhoto)
+                .into(binding.ivDetailPhoto)
 
             binding.apply {
                 toolbar.title = "${story.name}"
-                tvName.text = "${story.name}"
-                tvPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
+                tvDetailName.text = "${story.name}"
+                tvDetailPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
                     "Diunggah ${ChronoUnit.YEARS.between(parsedDateTime, today)} tahun yang lalu"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
                     "Diunggah ${ChronoUnit.MONTHS.between(parsedDateTime, today)} bulan yang lalu"
@@ -64,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
                 } else {
                     "Baru saja diunggah"
                 }
-                tvDescription.text = "${story.description}"
+                tvDetailDescription.text = "${story.description}"
             }
         }
 

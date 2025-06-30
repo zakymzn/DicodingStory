@@ -34,17 +34,16 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
     class MyViewHolder(val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(story: StoryEntity) {
-            val id = story.id
             val today = LocalDateTime.now()
             val parsedDateTime = OffsetDateTime.parse(story.createdAt).atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
 
             Glide.with(this@MyViewHolder.itemView.context)
                 .load(story.photoUrl)
-                .into(binding.ivPhoto)
+                .into(binding.ivItemPhoto)
 
             binding.apply {
-                tvName.text = "${story.name}"
-                tvPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
+                tvItemName.text = "${story.name}"
+                tvItemPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
                     "${ChronoUnit.YEARS.between(parsedDateTime, today)} tahun yang lalu"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
                     "${ChronoUnit.MONTHS.between(parsedDateTime, today)} bulan yang lalu"
