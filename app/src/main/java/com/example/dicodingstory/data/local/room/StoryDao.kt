@@ -9,7 +9,7 @@ import com.example.dicodingstory.data.local.entity.StoryEntity
 
 @Dao
 interface StoryDao {
-    @Query("SELECT * FROM story")
+    @Query("SELECT * FROM story ORDER BY createdAt DESC")
     fun getAllStories(): LiveData<List<StoryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
