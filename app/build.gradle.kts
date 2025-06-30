@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.glide)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.androidx.exifinterface)
 
     // retrofit
     implementation(libs.retrofit)

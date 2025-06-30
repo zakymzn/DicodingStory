@@ -13,6 +13,8 @@ import com.example.dicodingstory.utils.AppExecutors
 import com.example.dicodingstory.utils.SessionManager
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class StoryRepository private constructor(
@@ -46,13 +48,7 @@ class StoryRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.registerAccount(name, email, password)
-            val error = response.error
-            val message = response.message
-            val result = StoryErrorResponse(
-                error,
-                message
-            )
-            emit(Result.Success(result))
+            emit(Result.Success(response))
         } catch (e: HttpException) {
             Log.e("StoryRepository", "registerAccount: ${e.message.toString()}")
             val jsonInString = e.response()?.errorBody()?.string()
@@ -96,6 +92,27 @@ class StoryRepository private constructor(
         }
         val localData: LiveData<Result<List<StoryEntity>>> = storyDao.getAllStories().map { Result.Success(it) }
         emitSource(localData)
+    }
+
+    fun addNewStory(file: MultipartBody.Part, description: RequestBody): LiveData<Result<StoryErrorResponse>> = liveData {
+        emit(Result.Loading)
+        val token = session.getSessionToken().first()
+
+        if (token.isNullOrEmpty()) {
+            emit(Result.Error("Token tidak ditemukan"))
+            return@liveData
+        }
+
+        try {
+            val response = apiService.addNewStory(file, description)
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            Log.e("StoryRepository", "addNewStory: ${e.message.toString()}")
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, StoryErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
+        }
     }
 
     companion object {

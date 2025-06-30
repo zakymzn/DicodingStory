@@ -25,7 +25,7 @@
             app:navigationIcon="@drawable/baseline_arrow_back_24"
             app:navigationIconTint="?attr/colorOnPrimary"/>
     </com.google.android.material.appbar.AppBarLayout>
-    
+
     <ScrollView
         android:id="@+id/sv_upload"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/ed_story_description"
+                android:id="@+id/ed_add_description"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"
@@ -51,44 +51,51 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <Button
-                android:id="@+id/bt_gallery"
+                android:id="@+id/button_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/gallery"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ed_story_description"/>
+                app:layout_constraintTop_toBottomOf="@+id/ed_add_description"/>
 
             <Button
-                android:id="@+id/bt_camera"
+                android:id="@+id/button_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/camera"
-                app:layout_constraintStart_toEndOf="@+id/bt_gallery"
-                app:layout_constraintTop_toBottomOf="@+id/ed_story_description"/>
+                app:layout_constraintStart_toEndOf="@+id/button_gallery"
+                app:layout_constraintTop_toBottomOf="@+id/ed_add_description"/>
 
             <Button
-                android:id="@+id/bt_upload"
+                android:id="@+id/button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/upload"
-                app:layout_constraintTop_toBottomOf="@+id/ed_story_description"
+                app:layout_constraintTop_toBottomOf="@+id/ed_add_description"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <ImageView
                 android:id="@+id/iv_preview"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/bt_gallery"
+                app:layout_constraintTop_toBottomOf="@+id/button_gallery"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:src="@mipmap/ic_launcher"/>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pb_upload"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
