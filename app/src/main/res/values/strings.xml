@@ -20,4 +20,5 @@
     <string name="gallery">Galeri</string>
     <string name="camera">Kamera</string>
     <string name="upload">Upload</string>
+    <string name="text_no_story">Tidak ada story hari ini. Ayo bagikan story tentang keseruanmu hari ini.</string>
 </resources>

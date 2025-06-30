@@ -1,5 +1,6 @@
 package com.example.dicodingstory.ui.main
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         val fabAddNewStory = binding.fabAddNewStory
         val pbMain = binding.pbMain
         val swipeRefreshLayout = binding.swipeRefreshLayout
+        val ivNoData = binding.ivNoData
+        val tvNoData = binding.tvNoData
 
         sessionManager = SessionManager.getInstance(applicationContext.dataStore)
 
@@ -65,7 +68,14 @@ class MainActivity : AppCompatActivity() {
                                     val stories = result.data
 
                                     if (stories.isNotEmpty()) {
+                                        rvStoryList.visibility = View.VISIBLE
+                                        ivNoData.visibility = View.GONE
+                                        tvNoData.visibility = View.GONE
                                         mainAdapter.submitList(stories)
+                                    } else {
+                                        rvStoryList.visibility = View.GONE
+                                        ivNoData.visibility = View.VISIBLE
+                                        tvNoData.visibility = View.VISIBLE
                                     }
                                 }
 
@@ -121,5 +131,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, UploadActivity::class.java)
             startActivity(intent)
         }
+
+        playAnimation()
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.ivNoData, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
     }
 }
