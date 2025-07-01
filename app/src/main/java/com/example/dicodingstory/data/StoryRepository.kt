@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.example.dicodingstory.data.local.entity.AccountEntity
 import com.example.dicodingstory.data.local.entity.StoryEntity
 import com.example.dicodingstory.data.local.room.StoryDao
 import com.example.dicodingstory.data.remote.response.StoryErrorResponse
@@ -33,6 +34,11 @@ class StoryRepository private constructor(
                 emit(Result.Error("Login gagal"))
             } else {
                 session.saveSessionToken(loginResult.token)
+                val account = AccountEntity(
+                    loginResult.userId!!,
+                    loginResult.name
+                )
+                storyDao.insertAccount(account)
                 emit(Result.Success(response))
             }
         } catch (e: HttpException) {
@@ -113,6 +119,10 @@ class StoryRepository private constructor(
             val errorMessage = errorBody.message
             emit(Result.Error(errorMessage.toString()))
         }
+    }
+
+    fun getAccount(): LiveData<AccountEntity> {
+        return storyDao.getAccount()
     }
 
     companion object {

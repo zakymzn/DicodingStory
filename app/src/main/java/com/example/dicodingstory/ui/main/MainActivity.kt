@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dicodingstory.R
 import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityMainBinding
+import com.example.dicodingstory.ui.account.AccountActivity
 import com.example.dicodingstory.ui.upload.UploadActivity
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
 import com.example.dicodingstory.utils.SessionManager
@@ -112,6 +113,11 @@ class MainActivity : AppCompatActivity() {
                         create()
                         show()
                     }
+                    true
+                }
+                R.id.action_account -> {
+                    val intent = Intent(this, AccountActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false

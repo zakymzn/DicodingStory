@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.dicodingstory.data.local.entity.AccountEntity
 import com.example.dicodingstory.data.local.entity.StoryEntity
 
 @Dao
@@ -17,4 +18,10 @@ interface StoryDao {
 
     @Query("DELETE FROM story")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM account")
+    fun getAccount(): LiveData<AccountEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAccount(account: AccountEntity)
 }
