@@ -76,11 +76,13 @@
         android:padding="16dp"
         android:background="@drawable/custom_edit_text_background"
         android:drawableStart="@drawable/baseline_account_circle_24"
+        android:drawableTint="?attr/colorControlNormal"
         android:drawablePadding="16dp"
         android:hint="@string/text_hint_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        tools:targetApi="m" />
 
     <TextView
         android:id="@+id/tv_email"
