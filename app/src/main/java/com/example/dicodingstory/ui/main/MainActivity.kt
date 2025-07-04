@@ -41,60 +41,11 @@ class MainActivity : AppCompatActivity() {
 
         sessionManager = SessionManager.getInstance(applicationContext.dataStore)
 
-        lifecycleScope.launch {
-            sessionManager.getSessionToken().collect { token ->
-                Log.d("MainActivity", "token : $token")
-                if (token.isNullOrEmpty()) {
-                    val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
-                    return@collect
-                } else {
-                    val mainViewModelFactory: MainViewModelFactory = MainViewModelFactory.getInstance(this@MainActivity)
-                    val mainViewModel: MainViewModel by viewModels {
-                        mainViewModelFactory
-                    }
-                    val mainAdapter = MainAdapter()
-
-                    mainViewModel.getAllStories().observe(this@MainActivity) { result ->
-                        if (result != null) {
-                            when (result) {
-                                is Result.Loading -> {
-                                    pbMain.visibility = View.VISIBLE
-                                }
-
-                                is Result.Success -> {
-                                    pbMain.visibility = View.GONE
-                                    val stories = result.data
-
-                                    if (stories.isNotEmpty()) {
-                                        rvStoryList.visibility = View.VISIBLE
-                                        ivNoData.visibility = View.GONE
-                                        tvNoData.visibility = View.GONE
-                                        mainAdapter.submitList(stories)
-                                    } else {
-                                        rvStoryList.visibility = View.GONE
-                                        ivNoData.visibility = View.VISIBLE
-                                        tvNoData.visibility = View.VISIBLE
-                                    }
-                                }
-
-                                is Result.Error -> {
-                                    pbMain.visibility = View.GONE
-                                    Toast.makeText(this@MainActivity, "Error : ${result.error}", Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                        }
-                    }
-
-                    rvStoryList.apply {
-                        layoutManager = GridLayoutManager(this@MainActivity, 2)
-                        adapter = mainAdapter
-                    }
-                }
-            }
+        val mainViewModelFactory: MainViewModelFactory = MainViewModelFactory.getInstance(this@MainActivity)
+        val mainViewModel: MainViewModel by viewModels {
+            mainViewModelFactory
         }
+        val mainAdapter = MainAdapter()
 
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -122,6 +73,55 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+
+        lifecycleScope.launch {
+            sessionManager.getSessionToken().collect { token ->
+                Log.d("MainActivity", "token : $token")
+                if (token.isNullOrEmpty()) {
+                    val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                    return@collect
+                }
+            }
+        }
+
+        mainViewModel.getAllStories().observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        pbMain.visibility = View.VISIBLE
+                    }
+
+                    is Result.Success -> {
+                        pbMain.visibility = View.GONE
+                        val stories = result.data
+
+                        if (stories.isNotEmpty()) {
+                            rvStoryList.visibility = View.VISIBLE
+                            ivNoData.visibility = View.GONE
+                            tvNoData.visibility = View.GONE
+                            mainAdapter.submitList(stories)
+                        } else {
+                            rvStoryList.visibility = View.GONE
+                            ivNoData.visibility = View.VISIBLE
+                            tvNoData.visibility = View.VISIBLE
+                        }
+                    }
+
+                    is Result.Error -> {
+                        pbMain.visibility = View.GONE
+                        Toast.makeText(this, "Error : ${result.error}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        rvStoryList.apply {
+            layoutManager = GridLayoutManager(this@MainActivity, 2)
+            adapter = mainAdapter
         }
 
         swipeRefreshLayout.setOnRefreshListener {
