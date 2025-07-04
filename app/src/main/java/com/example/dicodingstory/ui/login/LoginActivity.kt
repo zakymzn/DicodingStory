@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityLoginBinding
 import com.example.dicodingstory.ui.main.MainActivity
+import com.example.dicodingstory.ui.story.StoryActivity
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
@@ -50,10 +51,9 @@ class LoginActivity : AppCompatActivity() {
                             if (response.error == false) {
                                 Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT)
                                     .show()
-                                val intent = Intent(this, MainActivity::class.java)
+                                val intent = Intent(this, StoryActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                 startActivity(intent)
-                                finish()
                             }
                         }
 

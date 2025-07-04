@@ -36,6 +36,9 @@
             android:name=".ui.welcome.WelcomeActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.story.StoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
