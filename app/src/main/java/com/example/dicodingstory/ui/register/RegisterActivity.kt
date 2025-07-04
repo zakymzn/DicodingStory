@@ -56,7 +56,7 @@ class RegisterActivity : AppCompatActivity() {
                             val response = result.data
                             
                             if (response.error == false) {
-                                Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, getString(R.string.text_register_success), Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this, MainActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                 startActivity(intent)

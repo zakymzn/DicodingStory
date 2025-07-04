@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.dicodingstory.R
 import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityLoginBinding
 import com.example.dicodingstory.ui.main.MainActivity
@@ -48,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                             val response = result.data
 
                             if (response.error == false) {
-                                Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT)
+                                Toast.makeText(this, getString(R.string.text_login_success), Toast.LENGTH_SHORT)
                                     .show()
                                 val intent = Intent(this, MainActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

@@ -85,7 +85,7 @@ class UploadActivity : AppCompatActivity() {
                                 val response = result.data
 
                                 if (response.error == false) {
-                                    Toast.makeText(this, "Story Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, getString(R.string.text_upload_success), Toast.LENGTH_SHORT).show()
                                     val intent = Intent(this, MainActivity::class.java)
                                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                     startActivity(intent)
@@ -102,7 +102,7 @@ class UploadActivity : AppCompatActivity() {
                         }
                     }
                 }
-            } ?: Toast.makeText(this, "Gambar tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            } ?: Toast.makeText(this, getString(R.string.text_warning_image_empty), Toast.LENGTH_SHORT).show()
         }
     }
 

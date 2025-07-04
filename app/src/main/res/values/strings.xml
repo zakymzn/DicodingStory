@@ -7,6 +7,7 @@
     <string name="login">Login</string>
     <string name="text_login_title">Sudah siap untuk berbagi cerita?</string>
     <string name="text_login_message">Login dulu yuk!</string>
+    <string name="text_login_success">Login berhasil</string>
 
     <string name="register">Register</string>
     <string name="text_register_title">Isi data-data di bawah ini dengan lengkap ya</string>
@@ -14,8 +15,11 @@
     <string name="text_hint_name">Masukkan nama lengkap</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="text_register_success">Registrasi berhasil</string>
 
     <string name="logout">Logout</string>
+    <string name="text_logout_message">Apakah kamu yakin ingin logout?</string>
+    <string name="cancel">Batal</string>
     <string name="text_add_new_story">Buat story baru</string>
     <string name="text_no_story">Tidak ada story hari ini. Ayo bagikan story tentang keseruanmu hari ini.</string>
 
@@ -38,5 +42,8 @@
     <string name="gallery">Galeri</string>
     <string name="camera">Kamera</string>
     <string name="upload">Upload</string>
+    <string name="text_upload_success">Story berhasil diunggah</string>
+    <string name="text_warning_image_empty">Gambar tidak boleh kosong</string>
+
     <string name="account">Akun</string>
 </resources>

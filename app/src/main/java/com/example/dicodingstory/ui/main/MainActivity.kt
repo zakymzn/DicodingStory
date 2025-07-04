@@ -51,14 +51,14 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.action_logout -> {
                     AlertDialog.Builder(this@MainActivity).apply {
-                        setTitle("Logout")
-                        setMessage("Apakah kamu yakin ingin logout?")
-                        setPositiveButton("Keluar") { _, _ ->
+                        setTitle(getString(R.string.logout))
+                        setMessage(getString(R.string.text_logout_message))
+                        setPositiveButton(getString(R.string.logout)) { _, _ ->
                             lifecycleScope.launch {
                                 sessionManager.clearSessionToken()
                             }
                         }
-                        setNegativeButton("Batal") { dialog, _ ->
+                        setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                             dialog.dismiss()
                         }
                         create()
