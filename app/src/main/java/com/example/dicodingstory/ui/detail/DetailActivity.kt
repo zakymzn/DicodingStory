@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.dicodingstory.R
 import com.example.dicodingstory.data.local.entity.StoryEntity
@@ -65,10 +64,6 @@ class DetailActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-        }
-
-        fun getString(value: Int): String {
-            return ContextCompat.getString(this, value)
         }
     }
 
