@@ -14,7 +14,7 @@ object Injection {
     fun provideRepository(context: Context): StoryRepository {
         val sessionManager = SessionManager.getInstance(context.dataStore)
         val session = runBlocking { sessionManager.getSessionToken().first() }
-        val apiService = if (session != null) ApiConfig.getApiService(session) else ApiConfig.getApiService("")
+        val apiService = ApiConfig.getApiService(session)
         val database = StoryDatabase.getInstance(context)
         val dao = database.storyDao()
         val appExecutors = AppExecutors()
