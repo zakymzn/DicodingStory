@@ -5,7 +5,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +34,7 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
     class MyViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(story: StoryEntity) {
+            val context = this@MyViewHolder.itemView.context
             val today = LocalDateTime.now()
             val parsedDateTime = OffsetDateTime.parse(story.createdAt).atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
 
@@ -44,21 +45,21 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
             binding.apply {
                 tvItemName.text = "${story.name}"
                 tvItemPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
-                    "${ChronoUnit.YEARS.between(parsedDateTime, today)} ${getString(R.string.years_ago)}"
+                    "${ChronoUnit.YEARS.between(parsedDateTime, today)} ${getString(context, R.string.years_ago)}"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
-                    "${ChronoUnit.MONTHS.between(parsedDateTime, today)} ${getString(R.string.months_ago)}"
+                    "${ChronoUnit.MONTHS.between(parsedDateTime, today)} ${getString(context, R.string.months_ago)}"
                 } else if (ChronoUnit.WEEKS.between(parsedDateTime, today) in 1..4) {
-                    "${ChronoUnit.WEEKS.between(parsedDateTime, today)} ${getString(R.string.weeks_ago)}"
+                    "${ChronoUnit.WEEKS.between(parsedDateTime, today)} ${getString(context, R.string.weeks_ago)}"
                 } else if (ChronoUnit.DAYS.between(parsedDateTime, today) in 1..30) {
-                    "${ChronoUnit.DAYS.between(parsedDateTime, today)} ${getString(R.string.days_ago)}"
+                    "${ChronoUnit.DAYS.between(parsedDateTime, today)} ${getString(context, R.string.days_ago)}"
                 } else if (ChronoUnit.HOURS.between(parsedDateTime, today) in 1..24) {
-                    "${ChronoUnit.HOURS.between(parsedDateTime, today)} ${getString(R.string.hours_ago)}"
+                    "${ChronoUnit.HOURS.between(parsedDateTime, today)} ${getString(context, R.string.hours_ago)}"
                 } else if (ChronoUnit.MINUTES.between(parsedDateTime, today) in 1..60) {
-                    "${ChronoUnit.MINUTES.between(parsedDateTime, today)} ${getString(R.string.minutes_ago)}"
+                    "${ChronoUnit.MINUTES.between(parsedDateTime, today)} ${getString(context, R.string.minutes_ago)}"
                 } else if (ChronoUnit.SECONDS.between(parsedDateTime, today) in 1..60) {
-                    "${ChronoUnit.SECONDS.between(parsedDateTime, today)} ${getString(R.string.seconds_ago)}"
+                    "${ChronoUnit.SECONDS.between(parsedDateTime, today)} ${getString(context, R.string.seconds_ago)}"
                 } else {
-                    getString(R.string.just_now)
+                    getString(context, R.string.just_now)
                 }
                 itemStory.setOnClickListener {
                     val intent = Intent(this@MyViewHolder.itemView.context, DetailActivity::class.java)
@@ -66,10 +67,6 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
                     this@MyViewHolder.itemView.context.startActivity(intent)
                 }
             }
-        }
-
-        private fun getString(value: Int): String {
-            return ContextCompat.getString(this@MyViewHolder.itemView.context, value)
         }
     }
 
