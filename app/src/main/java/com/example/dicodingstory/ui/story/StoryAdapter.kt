@@ -30,7 +30,7 @@ class StoryAdapter : ListAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CA
         holder.bind(story)
     }
 
-    class MyViewHolder(val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(story: StoryEntity) {
             val today = LocalDateTime.now()
