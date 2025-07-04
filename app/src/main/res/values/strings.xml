@@ -23,6 +23,7 @@
     <string name="text_post_time">Waktu Post</string>
     <string name="text_content_description">Deskripsi konten</string>
 
+    <string name="uploaded">Diunggah</string>
     <string name="just_now">Baru saja</string>
     <string name="just_uploaded">Baru saja diunggah</string>
     <string name="seconds_ago">detik yang lalu</string>
