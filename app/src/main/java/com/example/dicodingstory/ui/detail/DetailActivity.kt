@@ -2,18 +2,11 @@ package com.example.dicodingstory.ui.detail
 
 import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.dicodingstory.R
-import com.example.dicodingstory.data.Result
-import com.example.dicodingstory.data.StoryRepository
 import com.example.dicodingstory.data.local.entity.StoryEntity
 import com.example.dicodingstory.databinding.ActivityDetailBinding
 import java.time.LocalDateTime
@@ -50,21 +43,21 @@ class DetailActivity : AppCompatActivity() {
                 toolbar.title = "${story.name}"
                 tvDetailName.text = "${story.name}"
                 tvDetailPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
-                    "Diunggah ${ChronoUnit.YEARS.between(parsedDateTime, today)} tahun yang lalu"
+                    "${getString(R.string.uploaded)} ${ChronoUnit.YEARS.between(parsedDateTime, today)} ${getString(R.string.years_ago)}"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
-                    "Diunggah ${ChronoUnit.MONTHS.between(parsedDateTime, today)} bulan yang lalu"
+                    "${getString(R.string.uploaded)} ${ChronoUnit.MONTHS.between(parsedDateTime, today)} ${getString(R.string.months_ago)}"
                 } else if (ChronoUnit.WEEKS.between(parsedDateTime, today) in 1..4) {
-                    "${ChronoUnit.WEEKS.between(parsedDateTime, today)} minggu yang lalu"
+                    "${getString(R.string.uploaded)} ${ChronoUnit.WEEKS.between(parsedDateTime, today)} ${getString(R.string.weeks_ago)}"
                 } else if (ChronoUnit.DAYS.between(parsedDateTime, today) in 1..30) {
-                    "Diunggah ${ChronoUnit.DAYS.between(parsedDateTime, today)} hari yang lalu"
+                    "${getString(R.string.uploaded)} ${ChronoUnit.DAYS.between(parsedDateTime, today)} ${getString(R.string.days_ago)}"
                 } else if (ChronoUnit.HOURS.between(parsedDateTime, today) in 1..24) {
-                    "Diunggah ${ChronoUnit.HOURS.between(parsedDateTime, today)} jam yang lalu"
+                    "${getString(R.string.uploaded)} ${ChronoUnit.HOURS.between(parsedDateTime, today)} ${getString(R.string.hours_ago)}"
                 } else if (ChronoUnit.MINUTES.between(parsedDateTime, today) in 1..60) {
-                    "Diunggah ${ChronoUnit.MINUTES.between(parsedDateTime, today)} menit yang lalu"
+                    "${getString(R.string.uploaded)} ${ChronoUnit.MINUTES.between(parsedDateTime, today)} ${getString(R.string.minutes_ago)}"
                 } else if (ChronoUnit.SECONDS.between(parsedDateTime, today) in 1..60) {
-                    "Diunggah ${ChronoUnit.SECONDS.between(parsedDateTime, today)} detik yang lalu"
+                    "${getString(R.string.uploaded)} ${ChronoUnit.SECONDS.between(parsedDateTime, today)} ${getString(R.string.seconds_ago)}"
                 } else {
-                    R.string.just_uploaded.toString()
+                    getString(R.string.just_uploaded)
                 }
                 tvDetailDescription.text = "${story.description}"
             }
@@ -72,6 +65,10 @@ class DetailActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        fun getString(value: Int): String {
+            return ContextCompat.getString(this, value)
         }
     }
 
