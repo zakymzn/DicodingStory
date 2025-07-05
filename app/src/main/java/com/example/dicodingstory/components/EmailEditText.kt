@@ -31,9 +31,7 @@ class EmailEditText @JvmOverloads constructor(
         setButtonDrawables(startOfTheText = lockIcon)
 
         addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // do nothing
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 error = if (!s.isNullOrEmpty() && !isValidEmail(s)) {
@@ -45,9 +43,7 @@ class EmailEditText @JvmOverloads constructor(
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {
-                // do nothing
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 

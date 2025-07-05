@@ -38,9 +38,7 @@ class PasswordEditText @JvmOverloads constructor(
         setOnTouchListener(this)
 
         addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // do nothing
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 if (s.toString().length < 8) {
@@ -50,9 +48,7 @@ class PasswordEditText @JvmOverloads constructor(
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {
-                // do nothing
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 
