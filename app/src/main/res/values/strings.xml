@@ -1,49 +1,54 @@
 <resources>
     <string name="app_name">Dicoding Story</string>
 
-    <string name="text_welcome_title">Selamat datang di Dicoding Story!</string>
-    <string name="text_welcome_desc">Bagikan keseruanmu saat belajar di Dicoding bersama teman-teman!</string>
+    <string name="text_welcome_title">Welcome to Dicoding Story!</string>
+    <string name="text_welcome_desc">Share the excitement of learning at Dicoding with your friends!</string>
 
     <string name="login">Login</string>
-    <string name="text_login_title">Sudah siap untuk berbagi cerita?</string>
-    <string name="text_login_message">Login dulu yuk!</string>
-    <string name="text_login_success">Login berhasil</string>
+    <string name="text_login_title">Ready to share your story?</string>
+    <string name="text_login_message">Let\'s login first!</string>
+    <string name="text_login_success">Login successful</string>
 
     <string name="register">Register</string>
-    <string name="text_register_title">Isi data-data di bawah ini dengan lengkap ya</string>
-    <string name="name">Nama</string>
-    <string name="text_hint_name">Masukkan nama lengkap</string>
+    <string name="text_register_title">Please fill in the information below completely</string>
+    <string name="name">Name</string>
+    <string name="text_hint_name">Enter your full name</string>
     <string name="email">Email</string>
+    <string name="text_hint_email">Enter email</string>
+    <string name="text_invalid_email">Invalid email</string>
+    <string name="text_empty_email">Email cannot be empty</string>
     <string name="password">Password</string>
-    <string name="text_register_success">Registrasi berhasil</string>
+    <string name="text_hint_password">Enter password</string>
+    <string name="text_invalid_password">Passwords must be at least 8 characters long</string>
+    <string name="text_register_success">Registration successful</string>
 
     <string name="logout">Logout</string>
-    <string name="text_logout_message">Apakah kamu yakin ingin logout?</string>
-    <string name="cancel">Batal</string>
-    <string name="text_add_new_story">Buat story baru</string>
-    <string name="text_no_story">Tidak ada story hari ini. Ayo bagikan story tentang keseruanmu hari ini.</string>
+    <string name="text_logout_message">Are you sure you want to logout?</string>
+    <string name="cancel">Cancel</string>
+    <string name="text_add_new_story">Create a new story</string>
+    <string name="text_no_story">No story today. Let\'s share a story about your fun today.</string>
 
-    <string name="text_account_name">Nama Akun Pengguna</string>
-    <string name="text_post_time">Waktu Post</string>
-    <string name="text_content_description">Deskripsi konten</string>
+    <string name="text_account_name">User account name</string>
+    <string name="text_post_time">Post time</string>
+    <string name="text_content_description">Content description</string>
 
-    <string name="uploaded">Diunggah</string>
-    <string name="just_now">Baru saja</string>
-    <string name="just_uploaded">Baru saja diunggah</string>
-    <string name="seconds_ago">detik yang lalu</string>
-    <string name="minutes_ago">menit yang lalu</string>
-    <string name="hours_ago">jam yang lalu</string>
-    <string name="days_ago">hari yang lalu</string>
-    <string name="weeks_ago">minggu yang lalu</string>
-    <string name="months_ago">bulan yang lalu</string>
-    <string name="years_ago">tahun yang lalu</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="just_now">Just now</string>
+    <string name="just_uploaded">Just uploaded</string>
+    <string name="seconds_ago">seconds ago</string>
+    <string name="minutes_ago">minutes ago</string>
+    <string name="hours_ago">hours ago</string>
+    <string name="days_ago">days ago</string>
+    <string name="weeks_ago">weeks ago</string>
+    <string name="months_ago">months ago</string>
+    <string name="years_ago">years ago</string>
 
-    <string name="add_description">Tambahkan deskripsi...</string>
-    <string name="gallery">Galeri</string>
-    <string name="camera">Kamera</string>
+    <string name="add_description">Add a description...</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
     <string name="upload">Upload</string>
-    <string name="text_upload_success">Story berhasil diunggah</string>
-    <string name="text_warning_image_empty">Gambar tidak boleh kosong</string>
+    <string name="text_upload_success">Story uploaded successfully</string>
+    <string name="text_warning_image_empty">Image must not be empty</string>
 
-    <string name="account">Akun</string>
+    <string name="account">Account</string>
 </resources>
