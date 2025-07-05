@@ -18,7 +18,7 @@
         android:theme="@style/Theme.DicodingStory"
         tools:targetApi="31">
         <activity
-            android:name=".ui.account.AccountActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.upload.UploadActivity"

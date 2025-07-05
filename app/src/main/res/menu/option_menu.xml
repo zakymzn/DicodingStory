@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
     <group android:menuCategory="container">
         <item
-            android:id="@+id/action_account"
-            android:title="@string/account"
-            android:icon="@drawable/baseline_account_circle_24"
+            android:id="@+id/action_settings"
+            android:title="@string/settings"
+            android:icon="@drawable/baseline_settings_24"
             app:showAsAction="ifRoom"/>
         <item
             android:id="@+id/action_logout"

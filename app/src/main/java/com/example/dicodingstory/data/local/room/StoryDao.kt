@@ -19,7 +19,7 @@ interface StoryDao {
     @Query("DELETE FROM story")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM account")
+    @Query("SELECT * FROM settings")
     fun getAccount(): LiveData<AccountEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dicodingstory.R
 import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityMainBinding
-import com.example.dicodingstory.ui.account.AccountActivity
+import com.example.dicodingstory.ui.settings.SettingsActivity
 import com.example.dicodingstory.ui.upload.UploadActivity
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
 import com.example.dicodingstory.utils.SessionManager
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_logout -> {
-                    AlertDialog.Builder(this@MainActivity).apply {
+                    AlertDialog.Builder(this).apply {
                         setTitle(getString(R.string.logout))
                         setMessage(getString(R.string.text_logout_message))
                         setPositiveButton(getString(R.string.logout)) { _, _ ->
@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
-                R.id.action_account -> {
-                    val intent = Intent(this, AccountActivity::class.java)
+                R.id.action_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
                     startActivity(intent)
                     true
                 }
