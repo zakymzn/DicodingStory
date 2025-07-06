@@ -11,7 +11,7 @@ import com.example.dicodingstory.data.remote.response.StoryErrorResponse
 import com.example.dicodingstory.data.remote.response.StoryLoginResponse
 import com.example.dicodingstory.data.remote.retrofit.ApiService
 import com.example.dicodingstory.utils.AppExecutors
-import com.example.dicodingstory.utils.SessionManager
+import com.example.dicodingstory.utils.UserPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
 import okhttp3.MultipartBody
@@ -20,7 +20,7 @@ import retrofit2.HttpException
 
 class StoryRepository private constructor(
     private val apiService: ApiService,
-    private val session: SessionManager,
+    private val session: UserPreferences,
     private val storyDao: StoryDao,
     private val appExecutors: AppExecutors
 ) {
@@ -130,7 +130,7 @@ class StoryRepository private constructor(
         private var instance: StoryRepository? = null
         fun getInstance(
             apiService: ApiService,
-            session: SessionManager,
+            session: UserPreferences,
             storyDao: StoryDao,
             appExecutors: AppExecutors
         ): StoryRepository =

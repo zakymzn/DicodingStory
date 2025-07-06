@@ -11,10 +11,16 @@ import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 
-class SessionManager private constructor(private val dataStore: DataStore<Preferences>) {
+class UserPreferences private constructor(private val dataStore: DataStore<Preferences>) {
 
     fun getSessionToken(): Flow<String?> {
         return dataStore.data.map { it[TOKEN_KEY] }
+    }
+
+    fun getLanguageSetting(): Flow<String?> {
+        return dataStore.data.map {
+            it[LANGUAGE_KEY] ?: "en"
+        }
     }
 
     suspend fun saveSessionToken(token: String) {
@@ -29,15 +35,22 @@ class SessionManager private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
+    suspend fun saveLanguageSetting(language: String) {
+        dataStore.edit { preferences ->
+            preferences[LANGUAGE_KEY] = language
+        }
+    }
+
     companion object {
         private val TOKEN_KEY = stringPreferencesKey("session_token")
+        private val LANGUAGE_KEY = stringPreferencesKey("language_setting")
 
         @Volatile
-        private var INSTANCE: SessionManager? = null
+        private var INSTANCE: UserPreferences? = null
 
-        fun getInstance(dataStore: DataStore<Preferences>): SessionManager {
+        fun getInstance(dataStore: DataStore<Preferences>): UserPreferences {
             return INSTANCE ?: synchronized(this) {
-                val instance = SessionManager(dataStore)
+                val instance = UserPreferences(dataStore)
                 INSTANCE = instance
                 instance
             }

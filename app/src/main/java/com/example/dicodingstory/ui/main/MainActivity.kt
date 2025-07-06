@@ -17,14 +17,14 @@ import com.example.dicodingstory.databinding.ActivityMainBinding
 import com.example.dicodingstory.ui.settings.SettingsActivity
 import com.example.dicodingstory.ui.upload.UploadActivity
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
-import com.example.dicodingstory.utils.SessionManager
+import com.example.dicodingstory.utils.UserPreferences
 import com.example.dicodingstory.utils.dataStore
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var sessionManager: SessionManager
+    private lateinit var preferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val ivNoData = binding.ivNoData
         val tvNoData = binding.tvNoData
 
-        sessionManager = SessionManager.getInstance(applicationContext.dataStore)
+        preferences = UserPreferences.getInstance(applicationContext.dataStore)
 
         val mainViewModelFactory: MainViewModelFactory = MainViewModelFactory.getInstance(this@MainActivity)
         val mainViewModel: MainViewModel by viewModels {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                         setMessage(getString(R.string.text_logout_message))
                         setPositiveButton(getString(R.string.logout)) { _, _ ->
                             lifecycleScope.launch {
-                                sessionManager.clearSessionToken()
+                                preferences.clearSessionToken()
                             }
                         }
                         setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
-            sessionManager.getSessionToken().collect { token ->
+            preferences.getSessionToken().collect { token ->
                 Log.d("MainActivity", "token : $token")
                 if (token.isNullOrEmpty()) {
                     val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
