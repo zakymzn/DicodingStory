@@ -17,7 +17,7 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
         return dataStore.data.map { it[TOKEN_KEY] }
     }
 
-    fun getLanguageSetting(): Flow<String?> {
+    fun getLanguageSetting(): Flow<String> {
         return dataStore.data.map {
             it[LANGUAGE_KEY] ?: "en"
         }

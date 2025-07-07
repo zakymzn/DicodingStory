@@ -65,6 +65,7 @@ dependencies {
     // livedata dan room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.preference)
     ksp(libs.room.compiler)
 
     // datastore
