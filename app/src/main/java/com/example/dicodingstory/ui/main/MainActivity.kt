@@ -93,6 +93,8 @@ class MainActivity : AppCompatActivity() {
                 when (result) {
                     is Result.Loading -> {
                         pbMain.visibility = View.VISIBLE
+                        ivNoData.visibility = View.GONE
+                        tvNoData.visibility = View.GONE
                     }
 
                     is Result.Success -> {
