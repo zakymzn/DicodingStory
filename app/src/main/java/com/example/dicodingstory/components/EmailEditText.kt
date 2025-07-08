@@ -22,7 +22,7 @@ class EmailEditText @JvmOverloads constructor(
     private lateinit var lockIcon: Drawable
 
     init {
-        hint = "Masukkan email Anda"
+        hint = ContextCompat.getString(context, R.string.text_hint_email)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
         inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
         compoundDrawablePadding = 40
@@ -35,9 +35,9 @@ class EmailEditText @JvmOverloads constructor(
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 error = if (!s.isNullOrEmpty() && !isValidEmail(s)) {
-                    "Email tidak valid"
+                    ContextCompat.getString(context, R.string.text_invalid_email)
                 } else if (s.isNullOrEmpty()) {
-                    "Email tidak boleh kosong"
+                    ContextCompat.getString(context, R.string.text_empty_email)
                 } else {
                     null
                 }

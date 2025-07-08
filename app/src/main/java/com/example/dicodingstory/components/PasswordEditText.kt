@@ -23,7 +23,7 @@ class PasswordEditText @JvmOverloads constructor(
     private lateinit var visibilityOffIcon: Drawable
 
     init {
-        hint = "Masukkan password Anda"
+        hint = ContextCompat.getString(context, R.string.text_hint_password)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
         inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         compoundDrawablePadding = 40
@@ -42,7 +42,7 @@ class PasswordEditText @JvmOverloads constructor(
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 if (s.toString().length < 8) {
-                    setError("Password tidak boleh kurang dari 8 karakter", null)
+                    setError(context.getString(R.string.text_invalid_password), null)
                 } else {
                     error = null
                 }
