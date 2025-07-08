@@ -6,24 +6,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dicodingstory.R
 import com.example.dicodingstory.databinding.ActivitySettingsBinding
+import com.example.dicodingstory.utils.LocaleHelper
 import com.example.dicodingstory.utils.UserPreferences
 import com.example.dicodingstory.utils.dataStore
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
-import java.util.Locale
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
 
     override fun attachBaseContext(newBase: Context) {
-        val userPreferences = UserPreferences.getInstance(newBase.dataStore)
-        val language = runBlocking { userPreferences.getLanguageSetting().first() }
-        val locale = Locale(language)
-        val config = newBase.resources.configuration
-        Locale.setDefault(locale)
-        config.setLocale(locale)
-        val context = newBase.createConfigurationContext(config)
+        val language = LocaleHelper.getSavedLanguage(newBase)
+        val context = LocaleHelper.setLocale(newBase, language)
         super.attachBaseContext(context)
     }
 

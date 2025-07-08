@@ -1,6 +1,7 @@
 package com.example.dicodingstory.ui.main
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.example.dicodingstory.databinding.ActivityMainBinding
 import com.example.dicodingstory.ui.settings.SettingsActivity
 import com.example.dicodingstory.ui.upload.UploadActivity
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
+import com.example.dicodingstory.utils.LocaleHelper
 import com.example.dicodingstory.utils.UserPreferences
 import com.example.dicodingstory.utils.dataStore
 import kotlinx.coroutines.launch
@@ -25,6 +27,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferences: UserPreferences
+
+    override fun attachBaseContext(newBase: Context) {
+        val language = LocaleHelper.getSavedLanguage(newBase)
+        val context = LocaleHelper.setLocale(newBase, language)
+        super.attachBaseContext(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
