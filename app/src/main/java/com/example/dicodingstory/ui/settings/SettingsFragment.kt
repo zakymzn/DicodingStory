@@ -26,6 +26,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val intent = requireActivity().intent
                 requireActivity().finish()
                 startActivity(intent)
+                requireActivity().overridePendingTransition(0, 0)
             }
             true
         }
