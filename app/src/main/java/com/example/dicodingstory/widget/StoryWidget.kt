@@ -24,12 +24,6 @@ class StoryWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
-        if (intent.action != null) {
-            if (intent.action == TOAST_ACTION) {
-                val viewIndex = intent.getIntExtra(EXTRA_ITEM, 0)
-                Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     override fun onEnabled(context: Context) {}
@@ -37,7 +31,6 @@ class StoryWidget : AppWidgetProvider() {
     override fun onDisabled(context: Context) {}
 
     companion object {
-        private const val TOAST_ACTION = "com.example.dicodingstory.TOAST_ACTION"
         const val EXTRA_ITEM = "com.example.dicodingstory.EXTRA_ITEM"
 
         private fun updateAppWidget(
@@ -52,18 +45,6 @@ class StoryWidget : AppWidgetProvider() {
             val views = RemoteViews(context.packageName, R.layout.story_widget)
             views.setRemoteAdapter(R.id.sv_widget, intent)
             views.setEmptyView(R.id.sv_widget, R.id.tv_widget_empty)
-
-            val toastIntent = Intent(context, StoryWidget::class.java)
-            toastIntent.action = TOAST_ACTION
-            toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-
-            val toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent,
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
-                else 0
-            )
-
-            views.setPendingIntentTemplate(R.id.sv_widget, toastPendingIntent)
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
