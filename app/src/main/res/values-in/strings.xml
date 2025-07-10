@@ -56,4 +56,6 @@
     <string name="app_language">Bahasa Aplikasi</string>
     <string name="select_language">Pilih bahasa (%s)</string>
     <string name="key_language">language</string>
+    <string name="appwidget_text">DAFTAR STORY</string>
+    <string name="text_empty_widget">Tidak ada story hari ini</string>
 </resources>

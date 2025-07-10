@@ -24,4 +24,7 @@ interface StoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAccount(account: AccountEntity)
+
+    @Query("SELECT * FROM story ORDER BY createdAt DESC LIMIT 1")
+    fun getAllStoryWidget(): List<StoryEntity>
 }

@@ -55,7 +55,6 @@
     <string name="app_language">Application Language</string>
     <string name="select_language">Select language (%s)</string>
     <string name="key_language">language</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="appwidget_text">STORY LIST</string>
+    <string name="text_empty_widget">No story today</string>
 </resources>
