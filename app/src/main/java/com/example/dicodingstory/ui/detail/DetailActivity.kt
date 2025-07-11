@@ -2,6 +2,7 @@ package com.example.dicodingstory.ui.detail
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -29,7 +30,15 @@ class DetailActivity : AppCompatActivity() {
         val tvDetailPostTime = binding.tvDetailPostTime
         val tvDetailDescription = binding.tvDetailDescription
 
+        val flFullPhoto = binding.flFullPhoto
+        val ivFullPhoto = binding.ivFullPhoto
+        val ibCloseFullPhoto = binding.ibCloseFullPhoto
+
         val story = intent.getParcelableExtra<StoryEntity>(EXTRA_STORY)
+
+        toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         if (story != null) {
             val today = LocalDateTime.now()
@@ -38,6 +47,14 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(story.photoUrl)
                 .into(ivDetailPhoto)
+
+            Glide.with(this)
+                .load(story.photoUrl)
+                .into(ivFullPhoto)
+
+            ivDetailPhoto.setOnClickListener {
+                flFullPhoto.visibility = View.VISIBLE
+            }
 
             binding.apply {
                 toolbar.title = "${story.name}"
@@ -63,8 +80,8 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        toolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        ibCloseFullPhoto.setOnClickListener {
+            flFullPhoto.visibility = View.GONE
         }
     }
 
