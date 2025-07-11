@@ -24,6 +24,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val toolbar = binding.materialToolbar
+        val ivDetailPhoto = binding.ivDetailPhoto
         val tvDetailName = binding.tvDetailName
         val tvDetailPostTime = binding.tvDetailPostTime
         val tvDetailDescription = binding.tvDetailDescription
@@ -36,7 +37,7 @@ class DetailActivity : AppCompatActivity() {
 
             Glide.with(this)
                 .load(story.photoUrl)
-                .into(binding.ivDetailPhoto)
+                .into(ivDetailPhoto)
 
             binding.apply {
                 toolbar.title = "${story.name}"

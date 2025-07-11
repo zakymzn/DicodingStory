@@ -1,11 +1,14 @@
 package com.example.dicodingstory.ui.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat.getString
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +41,7 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
             val today = LocalDateTime.now()
             val parsedDateTime = OffsetDateTime.parse(story.createdAt).atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
 
-            Glide.with(this@MyViewHolder.itemView.context)
+            Glide.with(context)
                 .load(story.photoUrl)
                 .into(binding.ivItemPhoto)
 
@@ -62,9 +65,17 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
                     getString(context, R.string.just_now)
                 }
                 itemStory.setOnClickListener {
-                    val intent = Intent(this@MyViewHolder.itemView.context, DetailActivity::class.java)
+                    val intent = Intent(itemStory.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_STORY, story)
-                    this@MyViewHolder.itemView.context.startActivity(intent)
+
+                    val optionsCompat: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemStory.context as Activity,
+                        Pair(ivItemPhoto, "detail_photo"),
+                        Pair(tvItemName, "detail_name"),
+                        Pair(tvItemPostTime, "detail_post_time"),
+                    )
+
+                    itemStory.context.startActivity(intent, optionsCompat.toBundle())
                 }
             }
         }
