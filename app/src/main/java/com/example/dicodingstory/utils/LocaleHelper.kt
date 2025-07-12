@@ -1,5 +1,6 @@
 package com.example.dicodingstory.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -10,10 +11,11 @@ object LocaleHelper {
     fun getSavedLanguage(context: Context): String {
         val userPreferences = UserPreferences.getInstance(context.dataStore)
         return runBlocking {
-            userPreferences.getLanguageSetting().first() ?: "en"
+            userPreferences.getLanguageSetting().first()
         }
     }
 
+    @SuppressLint("AppBundleLocaleChanges")
     fun setLocale(context: Context, language: String): Context {
         val locale = Locale(language)
         Locale.setDefault(locale)
