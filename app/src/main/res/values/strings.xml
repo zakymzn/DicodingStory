@@ -57,15 +57,15 @@
     <string name="appwidget_text">STORY LIST</string>
     <string name="text_empty_widget">No story today</string>
 
-    <string name="content_desc_iv_detail_photo">Gambar di halaman detail story</string>
-    <string name="content_desc_iv_full_photo">Gambar di halaman detail dalam mode layar penuh</string>
-    <string name="content_desc_ib_close_full_photo">Tombol bergambar silang untuk menutup mode layar penuh</string>
-    <string name="content_desc_iv_login">Gambar vector di halaman login</string>
-    <string name="content_desc_iv_no_data">Gambar vector ketika tidak ada story</string>
-    <string name="content_desc_iv_register">Gambar vector di halaman register</string>
-    <string name="content_desc_iv_account_photo">Gambar profil di halaman settings</string>
-    <string name="content_desc_iv_preview">Preview gambar yang akan diupload</string>
-    <string name="content_desc_iv_welcome">Gambar vector di halaman welcome</string>
-    <string name="content_desc_iv_item_photo">Gambar item story</string>
-    <string name="content_desc_iv_item_widget_photo">Gambar item widget story</string>
+    <string name="content_desc_iv_detail_photo">Image on the story details page</string>
+    <string name="content_desc_iv_full_photo">Image on the details page in full screen mode</string>
+    <string name="content_desc_ib_close_full_photo">Close full screen mode</string>
+    <string name="content_desc_iv_login">Vector image on the login page</string>
+    <string name="content_desc_iv_no_data">Vector image when there is no story</string>
+    <string name="content_desc_iv_register">Vector image on the register page</string>
+    <string name="content_desc_iv_account_photo">Profile picture on the settings page</string>
+    <string name="content_desc_iv_preview">Preview the image to be uploaded</string>
+    <string name="content_desc_iv_welcome">Vector image on the welcome page</string>
+    <string name="content_desc_iv_item_photo">Item story image</string>
+    <string name="content_desc_iv_item_widget_photo">Image of widget story item</string>
 </resources>

@@ -60,7 +60,7 @@
 
     <string name="content_desc_iv_detail_photo">Gambar di halaman detail story</string>
     <string name="content_desc_iv_full_photo">Gambar di halaman detail dalam mode layar penuh</string>
-    <string name="content_desc_ib_close_full_photo">Tombol bergambar silang untuk menutup mode layar penuh</string>
+    <string name="content_desc_ib_close_full_photo">Tutup mode layar penuh</string>
     <string name="content_desc_iv_login">Gambar vector di halaman login</string>
     <string name="content_desc_iv_no_data">Gambar vector ketika tidak ada story</string>
     <string name="content_desc_iv_register">Gambar vector di halaman register</string>
