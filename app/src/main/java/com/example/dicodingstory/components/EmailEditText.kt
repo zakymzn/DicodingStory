@@ -8,11 +8,8 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Patterns
-import android.view.MotionEvent
-import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
-import androidx.core.view.setPadding
 import com.example.dicodingstory.R
 
 class EmailEditText @JvmOverloads constructor(
@@ -23,7 +20,7 @@ class EmailEditText @JvmOverloads constructor(
 
     init {
         hint = ContextCompat.getString(context, R.string.text_hint_email)
-        textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+        textAlignment = TEXT_ALIGNMENT_VIEW_START
         inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
         compoundDrawablePadding = 40
         background = ContextCompat.getDrawable(context, R.drawable.custom_edit_text_background)

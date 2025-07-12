@@ -1,13 +1,10 @@
 package com.example.dicodingstory.widget
 
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.widget.RemoteViews
-import android.widget.Toast
 import androidx.core.net.toUri
 import com.example.dicodingstory.R
 

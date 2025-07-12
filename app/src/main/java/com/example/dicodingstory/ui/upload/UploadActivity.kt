@@ -6,29 +6,21 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.example.dicodingstory.R
 import com.example.dicodingstory.data.Result
-import com.example.dicodingstory.data.remote.retrofit.ApiConfig
 import com.example.dicodingstory.databinding.ActivityUploadBinding
 import com.example.dicodingstory.ui.main.MainActivity
 import com.example.dicodingstory.utils.getImageUri
 import com.example.dicodingstory.utils.reduceFileImage
 import com.example.dicodingstory.utils.uriToFile
-import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.HttpException
 
 class UploadActivity : AppCompatActivity() {
 

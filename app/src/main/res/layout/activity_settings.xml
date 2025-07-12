@@ -40,6 +40,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="16dp"
+            android:contentDescription="@string/content_desc_iv_account_photo"
             android:src="@drawable/baseline_account_circle_24"
             app:tint="@color/grey"
             app:layout_constraintStart_toStartOf="parent"

@@ -21,14 +21,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val languagePref = findPreference<ListPreference>(languageKey)
 
         languagePref?.setOnPreferenceChangeListener { _, newValue ->
-//            lifecycleScope.launch {
-//                userPreferences.saveLanguageSetting(newValue.toString())
-//
-//                val intent = requireActivity().intent
-//                requireActivity().finish()
-//                startActivity(intent)
-//                requireActivity().overridePendingTransition(0, 0)
-//            }
             val language = newValue as String
             settingsViewModel.saveLanguageSetting(language)
 

@@ -24,7 +24,7 @@ class PasswordEditText @JvmOverloads constructor(
 
     init {
         hint = ContextCompat.getString(context, R.string.text_hint_password)
-        textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+        textAlignment = TEXT_ALIGNMENT_VIEW_START
         inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         compoundDrawablePadding = 40
         background = ContextCompat.getDrawable(context, R.drawable.custom_edit_text_background)

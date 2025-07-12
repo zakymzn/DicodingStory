@@ -29,6 +29,7 @@
         android:id="@+id/iv_welcome"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:contentDescription="@string/content_desc_iv_welcome"
         android:src="@drawable/welcome"
         app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
         app:layout_constraintEnd_toEndOf="parent"

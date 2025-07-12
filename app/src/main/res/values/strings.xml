@@ -43,7 +43,7 @@
     <string name="months_ago">months ago</string>
     <string name="years_ago">years ago</string>
 
-    <string name="add_description">Add a description...</string>
+    <string name="add_description">Add a description…</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="upload">Upload</string>
@@ -51,10 +51,21 @@
     <string name="text_warning_image_empty">Image must not be empty</string>
 
     <string name="settings">Settings</string>
-    <string name="account">Account</string>
     <string name="app_language">Application Language</string>
     <string name="select_language">Select language (%s)</string>
     <string name="key_language">language</string>
     <string name="appwidget_text">STORY LIST</string>
     <string name="text_empty_widget">No story today</string>
+
+    <string name="content_desc_iv_detail_photo">Gambar di halaman detail story</string>
+    <string name="content_desc_iv_full_photo">Gambar di halaman detail dalam mode layar penuh</string>
+    <string name="content_desc_ib_close_full_photo">Tombol bergambar silang untuk menutup mode layar penuh</string>
+    <string name="content_desc_iv_login">Gambar vector di halaman login</string>
+    <string name="content_desc_iv_no_data">Gambar vector ketika tidak ada story</string>
+    <string name="content_desc_iv_register">Gambar vector di halaman register</string>
+    <string name="content_desc_iv_account_photo">Gambar profil di halaman settings</string>
+    <string name="content_desc_iv_preview">Preview gambar yang akan diupload</string>
+    <string name="content_desc_iv_welcome">Gambar vector di halaman welcome</string>
+    <string name="content_desc_iv_item_photo">Gambar item story</string>
+    <string name="content_desc_iv_item_widget_photo">Gambar item widget story</string>
 </resources>
