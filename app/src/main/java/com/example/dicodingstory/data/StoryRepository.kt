@@ -74,7 +74,7 @@ class StoryRepository private constructor(
         }
 
         try {
-            val response = apiService.getAllStories()
+            val response = apiService.getAllStories("Bearer $token")
             val stories = response.listStory
             val storyList = stories.map { story ->
                 StoryEntity(
@@ -110,7 +110,7 @@ class StoryRepository private constructor(
         }
 
         try {
-            val response = apiService.addNewStory(file, description)
+            val response = apiService.addNewStory("Bearer $token", file, description)
             emit(Result.Success(response))
         } catch (e: HttpException) {
             Log.e("StoryRepository", "addNewStory: ${e.message.toString()}")
