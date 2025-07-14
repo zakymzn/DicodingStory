@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dicodingstory.data.StoryRepository
 import com.example.dicodingstory.di.Injection
 
-class LoginViewModelFactory private constructor(private val storyRepository: StoryRepository) : ViewModelProvider.NewInstanceFactory() {
+class LoginViewModelFactory private constructor(
+    private val context: Context,
+    private val storyRepository: StoryRepository
+) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(storyRepository) as T
+            return LoginViewModel(context, storyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
@@ -18,7 +21,10 @@ class LoginViewModelFactory private constructor(private val storyRepository: Sto
         @Volatile
         private var instance: LoginViewModelFactory? = null
         fun getInstance(context: Context): LoginViewModelFactory = instance ?: synchronized(this) {
-            instance ?: LoginViewModelFactory(Injection.provideRepository(context))
+            instance ?: LoginViewModelFactory(
+                context.applicationContext,
+                Injection.provideRepository(context.applicationContext)
+            )
         }.also { instance = it }
     }
 }

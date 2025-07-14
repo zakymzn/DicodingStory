@@ -28,6 +28,9 @@
     <string name="text_add_new_story">Create a new story</string>
     <string name="text_no_story">No story today. Let\'s share a story about your fun today.</string>
 
+    <string name="token_not_found">Token not found</string>
+    <string name="login_failed">Login failed</string>
+
     <string name="text_account_name">User account name</string>
     <string name="text_post_time">Post time</string>
     <string name="text_content_description">Content description</string>

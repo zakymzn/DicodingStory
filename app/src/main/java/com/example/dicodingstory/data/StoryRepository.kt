@@ -24,14 +24,14 @@ class StoryRepository private constructor(
     private val storyDao: StoryDao,
     private val appExecutors: AppExecutors
 ) {
-    fun loginAccount(email: String, password: String): LiveData<Result<StoryLoginResponse>> = liveData {
+    fun loginAccount(email: String, password: String, errorMessage: String): LiveData<Result<StoryLoginResponse>> = liveData {
         emit(Result.Loading)
         try {
             val response = apiService.loginAccount(email, password)
             val loginResult = response.loginResult
 
             if (response.error == true || loginResult?.token == null) {
-                emit(Result.Error("Login gagal"))
+                emit(Result.Error(errorMessage))
             } else {
                 session.saveSessionToken(loginResult.token)
                 val account = AccountEntity(
@@ -64,12 +64,12 @@ class StoryRepository private constructor(
         }
     }
 
-    fun getAllStories(): LiveData<Result<List<StoryEntity>>> = liveData {
+    fun getAllStories(errorMessage: String): LiveData<Result<List<StoryEntity>>> = liveData {
         emit(Result.Loading)
         val token = session.getSessionToken().first()
 
         if (token.isNullOrEmpty()) {
-            emit(Result.Error("Token tidak ditemukan"))
+            emit(Result.Error(errorMessage))
             return@liveData
         }
 
@@ -100,12 +100,12 @@ class StoryRepository private constructor(
         emitSource(localData)
     }
 
-    fun addNewStory(file: MultipartBody.Part, description: RequestBody): LiveData<Result<StoryErrorResponse>> = liveData {
+    fun addNewStory(file: MultipartBody.Part, description: RequestBody, errorMessage: String): LiveData<Result<StoryErrorResponse>> = liveData {
         emit(Result.Loading)
         val token = session.getSessionToken().first()
 
         if (token.isNullOrEmpty()) {
-            emit(Result.Error("Token tidak ditemukan"))
+            emit(Result.Error(errorMessage))
             return@liveData
         }
 

@@ -29,6 +29,9 @@
     <string name="text_add_new_story">Buat story baru</string>
     <string name="text_no_story">Tidak ada story hari ini. Ayo bagikan story tentang keseruanmu hari ini.</string>
 
+    <string name="token_not_found">Token tidak ditemukan</string>
+    <string name="login_failed">Login gagal</string>
+
     <string name="text_account_name">Nama akun pengguna</string>
     <string name="text_post_time">Waktu post</string>
     <string name="text_content_description">Deskripsi konten</string>

@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dicodingstory.data.StoryRepository
 import com.example.dicodingstory.di.Injection
 
-class UploadViewModelFactory private constructor(private val storyRepository: StoryRepository) : ViewModelProvider.NewInstanceFactory() {
+class UploadViewModelFactory private constructor(
+    private val context: Context,
+    private val storyRepository: StoryRepository) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UploadViewModel::class.java)) {
-            return UploadViewModel(storyRepository) as T
+            return UploadViewModel(context, storyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
@@ -18,7 +20,10 @@ class UploadViewModelFactory private constructor(private val storyRepository: St
         @Volatile
         private var instance: UploadViewModelFactory? = null
         fun getInstance(context: Context): UploadViewModelFactory = instance ?: synchronized(this) {
-            instance ?: UploadViewModelFactory(Injection.provideRepository(context))
+            instance ?: UploadViewModelFactory(
+                context.applicationContext,
+                Injection.provideRepository(context.applicationContext)
+            )
         }.also { instance = it }
     }
 }
