@@ -1,5 +1,6 @@
 package com.example.dicodingstory.ui.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ class MainViewModelFactory private constructor(
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: MainViewModelFactory? = null
         fun getInstance(context: Context): MainViewModelFactory = instance ?: synchronized(this) {

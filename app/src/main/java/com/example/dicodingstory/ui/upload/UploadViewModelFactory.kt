@@ -1,5 +1,6 @@
 package com.example.dicodingstory.ui.upload
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ class UploadViewModelFactory private constructor(
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: UploadViewModelFactory? = null
         fun getInstance(context: Context): UploadViewModelFactory = instance ?: synchronized(this) {
