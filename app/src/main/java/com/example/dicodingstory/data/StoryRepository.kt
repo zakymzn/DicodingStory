@@ -12,6 +12,7 @@ import com.example.dicodingstory.data.remote.response.StoryLoginResponse
 import com.example.dicodingstory.data.remote.retrofit.ApiService
 import com.example.dicodingstory.utils.AppExecutors
 import com.example.dicodingstory.utils.UserPreferences
+import com.example.dicodingstory.utils.UserSharedPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
 import okhttp3.MultipartBody
@@ -20,7 +21,7 @@ import retrofit2.HttpException
 
 class StoryRepository private constructor(
     private val apiService: ApiService,
-    private val session: UserPreferences,
+    private val session: UserSharedPreferences,
     private val storyDao: StoryDao,
     private val appExecutors: AppExecutors
 ) {
@@ -66,7 +67,7 @@ class StoryRepository private constructor(
 
     fun getAllStories(): LiveData<Result<List<StoryEntity>>> = liveData {
         emit(Result.Loading)
-        val token = session.getSessionToken().first()
+        val token = session.getSessionToken()
 
         if (token.isNullOrEmpty()) {
             emit(Result.Error("Token tidak ditemukan"))
@@ -102,7 +103,7 @@ class StoryRepository private constructor(
 
     fun addNewStory(file: MultipartBody.Part, description: RequestBody): LiveData<Result<StoryErrorResponse>> = liveData {
         emit(Result.Loading)
-        val token = session.getSessionToken().first()
+        val token = session.getSessionToken()
 
         if (token.isNullOrEmpty()) {
             emit(Result.Error("Token tidak ditemukan"))
@@ -130,7 +131,7 @@ class StoryRepository private constructor(
         private var instance: StoryRepository? = null
         fun getInstance(
             apiService: ApiService,
-            session: UserPreferences,
+            session: UserSharedPreferences,
             storyDao: StoryDao,
             appExecutors: AppExecutors
         ): StoryRepository =

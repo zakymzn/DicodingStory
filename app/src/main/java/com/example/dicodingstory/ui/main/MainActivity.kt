@@ -20,13 +20,14 @@ import com.example.dicodingstory.ui.upload.UploadActivity
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
 import com.example.dicodingstory.utils.LocaleHelper
 import com.example.dicodingstory.utils.UserPreferences
+import com.example.dicodingstory.utils.UserSharedPreferences
 import com.example.dicodingstory.utils.dataStore
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var preferences: UserPreferences
+    private lateinit var preferences: UserSharedPreferences
 
     override fun attachBaseContext(newBase: Context) {
         val language = LocaleHelper.getSavedLanguage(newBase)
@@ -47,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         val ivNoData = binding.ivNoData
         val tvNoData = binding.tvNoData
 
-        preferences = UserPreferences.getInstance(applicationContext.dataStore)
+        preferences = UserSharedPreferences(this)
+        val token = preferences.getSessionToken()
 
         val mainViewModelFactory: MainViewModelFactory = MainViewModelFactory.getInstance(this@MainActivity)
         val mainViewModel: MainViewModel by viewModels {
@@ -83,17 +85,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        lifecycleScope.launch {
-            preferences.getSessionToken().collect { token ->
-                Log.d("MainActivity", "token : $token")
-                if (token.isNullOrEmpty()) {
-                    val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
-                    return@collect
-                }
-            }
+        Log.d("MainActivity", "token : $token")
+
+        if (token.isNullOrEmpty()) {
+            val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
         }
 
         mainViewModel.getAllStories().observe(this) { result ->
