@@ -23,6 +23,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val toolbar = binding.materialToolbar
+
+        toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.normal_type -> {
+                    mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+                    true
+                }
+                R.id.satellite_type -> {
+                    mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                    true
+                }
+                R.id.terrain_type -> {
+                    mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+                    true
+                }
+                R.id.hybrid_type -> {
+                    mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+                    true
+                }
+                else -> {
+                    super.onOptionsItemSelected(menuItem)
+                }
+            }
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -45,5 +75,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.isIndoorLevelPickerEnabled = true
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMapToolbarEnabled = true
     }
 }
