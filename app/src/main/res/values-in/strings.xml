@@ -72,4 +72,7 @@
     <string name="content_desc_iv_welcome">Gambar vector di halaman welcome</string>
     <string name="content_desc_iv_item_photo">Gambar item story</string>
     <string name="content_desc_iv_item_widget_photo">Gambar item widget story</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="maps">Maps</string>
 </resources>

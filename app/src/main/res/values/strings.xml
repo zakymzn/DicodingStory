@@ -71,4 +71,7 @@
     <string name="content_desc_iv_welcome">Vector image on the welcome page</string>
     <string name="content_desc_iv_item_photo">Item story image</string>
     <string name="content_desc_iv_item_widget_photo">Image of widget story item</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="maps">Maps</string>
 </resources>

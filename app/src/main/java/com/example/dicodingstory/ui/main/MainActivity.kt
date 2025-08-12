@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dicodingstory.R
 import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityMainBinding
+import com.example.dicodingstory.ui.maps.MapsActivity
 import com.example.dicodingstory.ui.settings.SettingsActivity
 import com.example.dicodingstory.ui.upload.UploadActivity
 import com.example.dicodingstory.ui.welcome.WelcomeActivity
@@ -57,6 +58,18 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.action_maps -> {
+                    val intent = Intent(this, MapsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.action_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
                 R.id.action_logout -> {
                     AlertDialog.Builder(this).apply {
                         setTitle(getString(R.string.logout))
@@ -74,11 +87,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
-                R.id.action_settings -> {
-                    val intent = Intent(this, SettingsActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
+
                 else -> false
             }
         }
