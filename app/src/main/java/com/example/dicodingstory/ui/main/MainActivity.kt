@@ -105,38 +105,42 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        mainViewModel.getAllStories().observe(this) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
-                        pbMain.visibility = View.VISIBLE
-                        ivNoData.visibility = View.GONE
-                        tvNoData.visibility = View.GONE
-                    }
+//        mainViewModel.getAllStories().observe(this) { result ->
+//            if (result != null) {
+//                when (result) {
+//                    is Result.Loading -> {
+//                        pbMain.visibility = View.VISIBLE
+//                        ivNoData.visibility = View.GONE
+//                        tvNoData.visibility = View.GONE
+//                    }
+//
+//                    is Result.Success -> {
+//                        pbMain.visibility = View.GONE
+//                        val stories = result.data
+//
+//                        if (stories.isNotEmpty()) {
+//                            rvStoryList.visibility = View.VISIBLE
+//                            ivNoData.visibility = View.GONE
+//                            tvNoData.visibility = View.GONE
+//                            mainAdapter.submitList(stories)
+//                        } else {
+//                            rvStoryList.visibility = View.GONE
+//                            ivNoData.visibility = View.VISIBLE
+//                            tvNoData.visibility = View.VISIBLE
+//                        }
+//                    }
+//
+//                    is Result.Error -> {
+//                        pbMain.visibility = View.GONE
+//                        Toast.makeText(this, "Error : ${result.error}", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+//        }
 
-                    is Result.Success -> {
-                        pbMain.visibility = View.GONE
-                        val stories = result.data
-
-                        if (stories.isNotEmpty()) {
-                            rvStoryList.visibility = View.VISIBLE
-                            ivNoData.visibility = View.GONE
-                            tvNoData.visibility = View.GONE
-                            mainAdapter.submitList(stories)
-                        } else {
-                            rvStoryList.visibility = View.GONE
-                            ivNoData.visibility = View.VISIBLE
-                            tvNoData.visibility = View.VISIBLE
-                        }
-                    }
-
-                    is Result.Error -> {
-                        pbMain.visibility = View.GONE
-                        Toast.makeText(this, "Error : ${result.error}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        }
+        mainViewModel.getAllStories().observe(this, {
+            mainAdapter.submitData(lifecycle, it)
+        })
 
         rvStoryList.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)

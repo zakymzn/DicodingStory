@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat.getString
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 
-class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class MainAdapter : PagingDataAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
@@ -36,17 +37,17 @@ class MainAdapter : ListAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIFF_CALL
 
     class MyViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(story: StoryEntity) {
+        fun bind(story: StoryEntity?) {
             val context = this@MyViewHolder.itemView.context
             val today = LocalDateTime.now()
-            val parsedDateTime = OffsetDateTime.parse(story.createdAt).atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
+            val parsedDateTime = OffsetDateTime.parse(story?.createdAt).atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
 
             Glide.with(context)
-                .load(story.photoUrl)
+                .load(story?.photoUrl)
                 .into(binding.ivItemPhoto)
 
             binding.apply {
-                tvItemName.text = "${story.name}"
+                tvItemName.text = "${story?.name}"
                 tvItemPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
                     "${ChronoUnit.YEARS.between(parsedDateTime, today)} ${getString(context, R.string.years_ago)}"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
