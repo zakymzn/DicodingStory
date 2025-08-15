@@ -117,7 +117,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = true
 
         getMyLocation()
-        addStoryLocationMarker()
 
         val bounds: LatLngBounds = boundsBuilder.build()
         mMap.animateCamera(
@@ -148,9 +147,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
         }
-    }
-
-    private fun addStoryLocationMarker() {
-
     }
 }
