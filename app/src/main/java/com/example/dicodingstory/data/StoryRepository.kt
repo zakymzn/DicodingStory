@@ -100,6 +100,42 @@ class StoryRepository private constructor(
         emitSource(localData)
     }
 
+    fun getAllStoriesWithLocation(errorMessage: String): LiveData<Result<List<StoryEntity>>> = liveData {
+        emit(Result.Loading)
+        val token = session.getSessionToken().first()
+
+        if (token.isNullOrEmpty()) {
+            emit(Result.Error(errorMessage))
+            return@liveData
+        }
+
+        try {
+            val response = apiService.getAllStories("Bearer $token", location = true)
+            val stories = response.listStory
+            val storyList = stories.map { story ->
+                StoryEntity(
+                    story.id!!,
+                    story.name,
+                    story.description,
+                    story.photoUrl,
+                    story.createdAt,
+                    story.lat,
+                    story.lon
+                )
+            }
+            storyDao.deleteAll()
+            storyDao.insertStory(storyList)
+        } catch (e: HttpException) {
+            Log.e("StoryRepository", "getAllStoriesWithLocation: ${e.message.toString()}")
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, StoryErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
+        }
+        val localData: LiveData<Result<List<StoryEntity>>> = storyDao.getAllStories().map { Result.Success(it) }
+        emitSource(localData)
+    }
+
     fun addNewStory(file: MultipartBody.Part, description: RequestBody, errorMessage: String): LiveData<Result<StoryErrorResponse>> = liveData {
         emit(Result.Loading)
         val token = session.getSessionToken().first()

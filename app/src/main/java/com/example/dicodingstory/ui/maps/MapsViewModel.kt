@@ -10,5 +10,5 @@ class MapsViewModel(
     private val storyRepository: StoryRepository
 ) : ViewModel() {
     val errorMessage = context.getString(R.string.token_not_found)
-    fun getAllStories() = storyRepository.getAllStories(errorMessage)
+    fun getAllStoriesWithLocation() = storyRepository.getAllStoriesWithLocation(errorMessage)
 }
