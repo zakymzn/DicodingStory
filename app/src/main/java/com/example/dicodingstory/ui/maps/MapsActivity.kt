@@ -3,18 +3,27 @@ package com.example.dicodingstory.ui.maps
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.example.dicodingstory.R
+import com.example.dicodingstory.data.Result
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.example.dicodingstory.databinding.ActivityMapsBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private val boundsBuilder = LatLngBounds.Builder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +32,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         val toolbar = binding.materialToolbar
+
+        val myPoint = LatLng(-7.692545396855993, 109.67624793606501)
+
+        val mapsViewModelFactory: MapsViewModelFactory = MapsViewModelFactory.getInstance(this@MapsActivity)
+        val mapsViewModel: MapsViewModel by viewModels {
+            mapsViewModelFactory
+        }
+
+        boundsBuilder.include(myPoint)
 
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -52,6 +70,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+        mapsViewModel.getAllStories().observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+
+                    }
+
+                    is Result.Success -> {
+                        val stories = result.data
+                        Log.d("MapsActivity", "stories: $stories")
+
+                        if (stories.isNotEmpty()) {
+                            stories.forEach { story ->
+                                Log.d("MapsActivity", "story: $story")
+                                val latLng = LatLng(story.lat ?: 0.0, story.lon ?: 0.0)
+                                mMap.addMarker(MarkerOptions().position(latLng).title(story.name))
+                                boundsBuilder.include(latLng)
+                            }
+                        }
+                    }
+
+                    is Result.Error -> {
+                        Toast.makeText(this, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -66,6 +112,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = true
 
         getMyLocation()
+        addStoryLocationMarker()
+
+        val bounds: LatLngBounds = boundsBuilder.build()
+        mMap.animateCamera(
+            CameraUpdateFactory.newLatLngBounds(
+                bounds,
+                resources.displayMetrics.widthPixels,
+                resources.displayMetrics.heightPixels,
+                300
+            )
+        )
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -86,5 +143,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
         }
+    }
+
+    private fun addStoryLocationMarker() {
+
     }
 }
