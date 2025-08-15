@@ -85,7 +85,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             stories.forEach { story ->
                                 Log.d("MapsActivity", "story: $story")
                                 val latLng = LatLng(story.lat ?: 0.0, story.lon ?: 0.0)
-                                mMap.addMarker(MarkerOptions().position(latLng).title(story.name))
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(latLng)
+                                        .title(story.name)
+                                        .snippet(story.description)
+                                )
                                 boundsBuilder.include(latLng)
                             }
                         }
