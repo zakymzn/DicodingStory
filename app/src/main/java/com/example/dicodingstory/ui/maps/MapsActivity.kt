@@ -70,7 +70,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
-        mapsViewModel.getAllStories().observe(this) { result ->
+        mapsViewModel.getAllStoriesWithLocation().observe(this) { result ->
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
