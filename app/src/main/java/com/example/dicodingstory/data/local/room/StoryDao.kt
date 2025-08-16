@@ -1,6 +1,7 @@
 package com.example.dicodingstory.data.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,6 +13,9 @@ import com.example.dicodingstory.data.local.entity.StoryEntity
 interface StoryDao {
     @Query("SELECT * FROM story ORDER BY createdAt DESC")
     fun getAllStories(): LiveData<List<StoryEntity>>
+
+    @Query("SELECT * FROM story ORDER BY createdAt DESC")
+    fun getAllStoriesWithPaging(): PagingSource<Int, StoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStory(story: List<StoryEntity>)

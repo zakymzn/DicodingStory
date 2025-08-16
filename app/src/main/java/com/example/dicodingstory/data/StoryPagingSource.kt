@@ -31,15 +31,15 @@ class StoryPagingSource(
                 size = params.loadSize
             )
 
-            val stories = responseData.listStory.map { storyItem ->
+            val stories = responseData.listStory.map { story ->
                 StoryEntity(
-                    id = storyItem.id!!,
-                    name = storyItem.name,
-                    description = storyItem.description,
-                    photoUrl = storyItem.photoUrl,
-                    createdAt = storyItem.createdAt,
-                    lat = storyItem.lat,
-                    lon = storyItem.lon
+                    id = story.id!!,
+                    name = story.name,
+                    description = story.description,
+                    photoUrl = story.photoUrl,
+                    createdAt = story.createdAt,
+                    lat = story.lat,
+                    lon = story.lon
                 )
             }
 

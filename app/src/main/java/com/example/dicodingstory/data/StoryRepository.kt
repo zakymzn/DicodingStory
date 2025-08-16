@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -11,6 +12,7 @@ import androidx.paging.liveData
 import com.example.dicodingstory.data.local.entity.AccountEntity
 import com.example.dicodingstory.data.local.entity.StoryEntity
 import com.example.dicodingstory.data.local.room.StoryDao
+import com.example.dicodingstory.data.local.room.StoryDatabase
 import com.example.dicodingstory.data.remote.response.ListStoryItem
 import com.example.dicodingstory.data.remote.response.StoryErrorResponse
 import com.example.dicodingstory.data.remote.response.StoryLoginResponse
@@ -26,6 +28,7 @@ import retrofit2.HttpException
 class StoryRepository private constructor(
     private val apiService: ApiService,
     private val session: UserPreferences,
+    private val storyDatabase: StoryDatabase,
     private val storyDao: StoryDao,
     private val appExecutors: AppExecutors
 ) {
@@ -70,12 +73,15 @@ class StoryRepository private constructor(
     }
 
     fun getAllStories(): LiveData<PagingData<StoryEntity>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
-                pageSize = 3
+                pageSize = 6
             ),
+            remoteMediator = StoryRemoteMediator(storyDatabase, apiService, session),
             pagingSourceFactory = {
-                StoryPagingSource(apiService, session)
+//                StoryPagingSource(apiService, session)
+                storyDatabase.storyDao().getAllStoriesWithPaging()
             }
         ).liveData
     }
@@ -147,11 +153,12 @@ class StoryRepository private constructor(
         fun getInstance(
             apiService: ApiService,
             session: UserPreferences,
+            storyDatabase: StoryDatabase,
             storyDao: StoryDao,
             appExecutors: AppExecutors
         ): StoryRepository =
             instance ?: synchronized(this) {
-                instance ?: StoryRepository(apiService, session, storyDao, appExecutors)
+                instance ?: StoryRepository(apiService, session, storyDatabase, storyDao, appExecutors)
             }.also { instance = it }
     }
 }
