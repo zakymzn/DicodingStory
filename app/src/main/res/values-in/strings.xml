@@ -60,6 +60,7 @@
     <string name="key_language">language</string>
     <string name="appwidget_text">DAFTAR STORY</string>
     <string name="text_empty_widget">Tidak ada story hari ini</string>
+    <string name="retry">Coba lagi</string>
 
     <string name="content_desc_iv_detail_photo">Gambar di halaman detail story</string>
     <string name="content_desc_iv_full_photo">Gambar di halaman detail dalam mode layar penuh</string>

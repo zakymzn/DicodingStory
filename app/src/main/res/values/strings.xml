@@ -59,6 +59,7 @@
     <string name="key_language">language</string>
     <string name="appwidget_text">STORY LIST</string>
     <string name="text_empty_widget">No story today</string>
+    <string name="retry">Retry</string>
 
     <string name="content_desc_iv_detail_photo">Image on the story details page</string>
     <string name="content_desc_iv_full_photo">Image on the details page in full screen mode</string>
