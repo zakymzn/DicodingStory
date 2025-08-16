@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat.getString
 import androidx.core.util.Pair
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dicodingstory.R
@@ -32,22 +31,22 @@ class MainAdapter : PagingDataAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIF
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val story = getItem(position)
-        holder.bind(story)
+        holder.bind(story!!)
     }
 
     class MyViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(story: StoryEntity?) {
+        fun bind(story: StoryEntity) {
             val context = this@MyViewHolder.itemView.context
             val today = LocalDateTime.now()
-            val parsedDateTime = OffsetDateTime.parse(story?.createdAt).atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
+            val parsedDateTime = OffsetDateTime.parse(story.createdAt).atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
 
             Glide.with(context)
-                .load(story?.photoUrl)
+                .load(story.photoUrl)
                 .into(binding.ivItemPhoto)
 
             binding.apply {
-                tvItemName.text = "${story?.name}"
+                tvItemName.text = "${story.name}"
                 tvItemPostTime.text = if (ChronoUnit.YEARS.between(parsedDateTime, today) > 0) {
                     "${ChronoUnit.YEARS.between(parsedDateTime, today)} ${getString(context, R.string.years_ago)}"
                 } else if (ChronoUnit.MONTHS.between(parsedDateTime, today) in 1..12) {
