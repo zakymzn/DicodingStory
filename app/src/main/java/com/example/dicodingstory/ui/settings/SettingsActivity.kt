@@ -30,7 +30,9 @@ class SettingsActivity : AppCompatActivity() {
         val toolbar = binding.materialToolbar
         val tvAccountName = binding.tvAccountName
 
-        val settingsViewModelFactory: SettingsViewModelFactory = SettingsViewModelFactory.getInstance(this, userPreferences)
+        val settingsViewModelFactory: SettingsViewModelFactory = SettingsViewModelFactory.getInstance(this,
+            userPreferences as UserPreferences
+        )
         val settingsViewModel: SettingsViewModel by viewModels {
             settingsViewModelFactory
         }

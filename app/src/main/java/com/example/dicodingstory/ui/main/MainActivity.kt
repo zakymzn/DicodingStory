@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val ivNoData = binding.ivNoData
         val tvNoData = binding.tvNoData
 
-        preferences = UserPreferences.getInstance(applicationContext.dataStore)
+        preferences = UserPreferences.getInstance(applicationContext.dataStore) as UserPreferences
 
         val mainViewModelFactory: MainViewModelFactory = MainViewModelFactory.getInstance(this@MainActivity)
         val mainViewModel: MainViewModel by viewModels {

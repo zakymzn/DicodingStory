@@ -11,12 +11,13 @@ import android.util.Patterns
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.example.dicodingstory.R
+import com.example.dicodingstory.utils.isValidEmail
 
 class EmailEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : AppCompatEditText(context, attrs) {
 
-    private lateinit var lockIcon: Drawable
+    private var lockIcon: Drawable
 
     init {
         hint = ContextCompat.getString(context, R.string.text_hint_email)
@@ -61,6 +62,4 @@ class EmailEditText @JvmOverloads constructor(
             bottomOfTheText
         )
     }
-
-    private fun isValidEmail(email: CharSequence) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }

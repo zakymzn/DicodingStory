@@ -31,7 +31,9 @@ class MainAdapter : PagingDataAdapter<StoryEntity, MainAdapter.MyViewHolder>(DIF
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val story = getItem(position)
-        holder.bind(story!!)
+        if (story != null) {
+            holder.bind(story)
+        }
     }
 
     class MyViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {

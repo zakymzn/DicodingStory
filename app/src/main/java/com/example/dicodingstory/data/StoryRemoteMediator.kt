@@ -9,14 +9,14 @@ import com.example.dicodingstory.data.local.entity.RemoteKeys
 import com.example.dicodingstory.data.local.entity.StoryEntity
 import com.example.dicodingstory.data.local.room.StoryDatabase
 import com.example.dicodingstory.data.remote.retrofit.ApiService
-import com.example.dicodingstory.utils.UserPreferences
+import com.example.dicodingstory.utils.UserPreferencesContract
 import kotlinx.coroutines.flow.first
 
 @OptIn(ExperimentalPagingApi::class)
 class StoryRemoteMediator(
     private val database: StoryDatabase,
     private val apiService: ApiService,
-    private val preferences: UserPreferences
+    private val preferences: UserPreferencesContract
 ) : RemoteMediator<Int, StoryEntity>() {
 
     override suspend fun initialize(): InitializeAction {

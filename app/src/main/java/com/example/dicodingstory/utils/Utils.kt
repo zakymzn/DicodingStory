@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Patterns
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import com.example.dicodingstory.BuildConfig
@@ -106,3 +107,5 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap? {
         source, 0, 0, source.width, source.height, matrix, true
     )
 }
+
+fun isValidEmail(email: CharSequence) = Patterns.EMAIL_ADDRESS.matcher(email).matches()

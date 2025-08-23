@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.0"
+agp = "8.12.1"
 datastorePreferences = "1.1.7"
 glide = "4.16.0"
 kotlin = "1.9.24"
@@ -27,6 +27,11 @@ googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 playServicesMaps = "19.2.0"
 pagingRuntimeKtx = "3.1.0"
 roomPaging = "2.4.0-rc01"
+coreTesting = "2.1.0"
+kotlinxCoroutinesTest = "1.6.1"
+mockitoCore = "4.4.0"
+mockitoInline = "4.4.0"
+junitJunit = "4.12"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +61,11 @@ androidx-preference = { group = "androidx.preference", name = "preference", vers
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomPaging" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

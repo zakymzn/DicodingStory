@@ -18,9 +18,9 @@ class PasswordEditText @JvmOverloads constructor(
 ) : AppCompatEditText(context, attrs), View.OnTouchListener {
 
     private var isPasswordVisible = false
-    private lateinit var lockIcon: Drawable
-    private lateinit var visibilityOnIcon: Drawable
-    private lateinit var visibilityOffIcon: Drawable
+    private var lockIcon: Drawable
+    private var visibilityOnIcon: Drawable
+    private var visibilityOffIcon: Drawable
 
     init {
         hint = ContextCompat.getString(context, R.string.text_hint_password)

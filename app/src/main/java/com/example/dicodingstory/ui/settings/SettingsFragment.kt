@@ -14,7 +14,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
         val userPreferences = UserPreferences.getInstance(requireContext().dataStore)
 
-        val settingsViewModelFactory: SettingsViewModelFactory = SettingsViewModelFactory.getInstance(requireActivity(), userPreferences)
+        val settingsViewModelFactory: SettingsViewModelFactory = SettingsViewModelFactory.getInstance(requireActivity(),
+            userPreferences as UserPreferences
+        )
         val settingsViewModel: SettingsViewModel = ViewModelProvider(this, settingsViewModelFactory)[SettingsViewModel::class.java]
 
         val languageKey = getString(R.string.key_language)
