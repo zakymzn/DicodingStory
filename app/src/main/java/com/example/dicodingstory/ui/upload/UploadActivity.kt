@@ -23,16 +23,11 @@ import com.example.dicodingstory.utils.getImageUri
 import com.example.dicodingstory.utils.reduceFileImage
 import com.example.dicodingstory.utils.uriToFile
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.GoogleMap
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.util.Locale
 
 class UploadActivity : AppCompatActivity() {
 
@@ -91,20 +86,14 @@ class UploadActivity : AppCompatActivity() {
                 Log.d("Image File", "showImage: ${imageFile.path}")
 
                 val requestBodyDesc = description.toRequestBody("text/plain".toMediaType())
+                val latRequestBody = latitude.toString().toRequestBody("text/plain".toMediaType())
+                val lonRequestBody = longitude.toString().toRequestBody("text/plain".toMediaType())
                 val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
                 val multipartBody = MultipartBody.Part.createFormData(
                     "photo",
                     imageFile.name,
                     requestImageFile
                 )
-
-                var latRequestBody: RequestBody? = null
-                var lonRequestBody: RequestBody? = null
-
-                if (toggleCurrentLocation.isChecked && latitude != null && longitude != null) {
-                    latRequestBody = latitude.toString().toRequestBody("text/plain".toMediaType())
-                    lonRequestBody = longitude.toString().toRequestBody("text/plain".toMediaType())
-                }
 
                 uploadViewModel.addNewStory(multipartBody, requestBodyDesc, latRequestBody, lonRequestBody).observe(this) { result ->
                     if (result != null) {
@@ -199,8 +188,6 @@ class UploadActivity : AppCompatActivity() {
                 isFetchingLocation = false
                 val location: Location? = task.result
                 if (location != null) {
-//                    val geocoder = Geocoder(this, Locale.getDefault())
-//                    val list = geocoder.getFromLocation(location.latitude, location.longitude, 1)
                     latitude = location.latitude
                     longitude = location.longitude
                     Log.d("Location", "getMyLocation: $latitude, $longitude")

@@ -131,7 +131,7 @@ class StoryRepository private constructor(
         }
 
         try {
-            val response = apiService.addNewStory("Bearer $token", file, description)
+            val response = apiService.addNewStory("Bearer $token", file, description, lat, lon)
             emit(Result.Success(response))
         } catch (e: HttpException) {
             Log.e("StoryRepository", "addNewStory: ${e.message.toString()}")
