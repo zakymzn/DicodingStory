@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.preference)
     implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit.junit)
     testImplementation(libs.junit.junit)
     ksp(libs.room.compiler)

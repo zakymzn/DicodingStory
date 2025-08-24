@@ -121,7 +121,7 @@ class StoryRepository private constructor(
         emitSource(localData)
     }
 
-    fun addNewStory(file: MultipartBody.Part, description: RequestBody, errorMessage: String): LiveData<Result<StoryErrorResponse>> = liveData {
+    fun addNewStory(file: MultipartBody.Part, description: RequestBody, lat: RequestBody? = null, lon: RequestBody? = null, errorMessage: String): LiveData<Result<StoryErrorResponse>> = liveData {
         emit(Result.Loading)
         val token = session.getSessionToken().first()
 

@@ -12,5 +12,5 @@ class UploadViewModel(
     private val storyRepository: StoryRepository
 ) : ViewModel() {
     val errorMessage = context.getString(R.string.token_not_found)
-    fun addNewStory(file: MultipartBody.Part, description: RequestBody) = storyRepository.addNewStory(file, description, errorMessage)
+    fun addNewStory(file: MultipartBody.Part, description: RequestBody, lat: RequestBody? = null, lon: RequestBody? = null) = storyRepository.addNewStory(file, description, lat, lon, errorMessage)
 }

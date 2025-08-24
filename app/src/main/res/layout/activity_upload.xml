@@ -61,13 +61,23 @@
         app:layout_constraintStart_toEndOf="@+id/button_gallery"
         app:layout_constraintTop_toBottomOf="@+id/ed_add_description"/>
 
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/toggle_current_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:text="@string/include_current_location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_gallery"/>
+
     <ImageView
         android:id="@+id/iv_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:contentDescription="@string/content_desc_iv_preview"
-        app:layout_constraintTop_toBottomOf="@+id/button_gallery"
+        app:layout_constraintTop_toBottomOf="@+id/toggle_current_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/button_add"
