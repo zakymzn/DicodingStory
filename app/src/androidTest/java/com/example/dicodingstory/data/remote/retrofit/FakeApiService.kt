@@ -115,7 +115,7 @@ class FakeApiService : ApiService {
         val items: MutableLiveData<StoryListResponse> = MutableLiveData()
         val storyList: MutableList<ListStoryItem> = arrayListOf()
 
-        for (i in 1..100) {
+        for (i in 0..100) {
             val story = ListStoryItem(
                 i.toString(),
                 "name $i",
@@ -138,6 +138,6 @@ class FakeApiService : ApiService {
             listStory = storyList
         )
 
-        return items.value
+        return items.value!!
     }
 }

@@ -31,19 +31,17 @@ class StoryRemoteMediatorTest {
 
     @Before
     fun setUp() {
-        mockApi = FakeApiService()
         mockDb = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             StoryDatabase::class.java
         ).allowMainThreadQueries().build()
+        mockApi = FakeApiService()
         mockPreferences = FakeUserPreferences()
+        mockPreferences.setSessionToken("dummy-token")
     }
 
     @Test
     fun refreshLoadReturnsSuccessResultWhenMoreDataIsPresent() = runTest {
-
-        mockPreferences.setSessionToken("dummy-token")
-
         val remoteMediator = StoryRemoteMediator(
             mockDb,
             mockApi,

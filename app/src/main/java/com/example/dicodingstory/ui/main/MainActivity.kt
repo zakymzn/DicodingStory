@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         val toolbar = binding.materialToolbar
         val rvStoryList = binding.rvStoryList
         val fabAddNewStory = binding.fabAddNewStory
-        val pbMain = binding.pbMain
         val swipeRefreshLayout = binding.swipeRefreshLayout
         val ivNoData = binding.ivNoData
         val tvNoData = binding.tvNoData
@@ -114,7 +113,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        pbMain.visibility = View.GONE
         mainViewModel.getAllStories().observe(this, {
             mainAdapter.submitData(lifecycle, it)
         })

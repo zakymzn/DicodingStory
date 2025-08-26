@@ -43,6 +43,9 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -70,8 +73,8 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
-    testImplementation(libs.junit.junit)
-    testImplementation(libs.junit.junit)
+    implementation(libs.androidx.espresso.idling.resource)
+    implementation(libs.androidx.espresso.contrib)
     ksp(libs.room.compiler)
 
     // datastore
@@ -91,9 +94,13 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.core.testing) //InstantTaskExecutorRule
     androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
+    androidTestImplementation(libs.espresso.intents) //IntentsTestRule
 
     testImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
     testImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
+
+    //TestCoroutineDispatcher
+    debugImplementation(libs.androidx.fragment.testing) //launchFragmentInContainer
 }
