@@ -112,7 +112,7 @@ class FakeApiService : ApiService {
         size: Int?,
         location: Boolean
     ): StoryListResponse {
-        val items: MutableLiveData<StoryListResponse> = MutableLiveData()
+        val items: StoryListResponse
         val storyList: MutableList<ListStoryItem> = arrayListOf()
 
         for (i in 0..100) {
@@ -132,12 +132,12 @@ class FakeApiService : ApiService {
             storyList.subList((page - 1) * size, (page - 1) * size + size)
         }
 
-        items.value = StoryListResponse(
+        items = StoryListResponse(
             error = false,
             message = "Stories fetched successfully",
             listStory = storyList
         )
 
-        return items.value!!
+        return items
     }
 }
