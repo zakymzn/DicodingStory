@@ -1,6 +1,7 @@
 package com.example.dicodingstory.ui.maps
 
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.example.dicodingstory.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -79,11 +81,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     is Result.Success -> {
                         val stories = result.data
-                        Log.d("MapsActivity", "stories: $stories")
+                        Log.d(TAG, "stories: $stories")
 
                         if (stories.isNotEmpty()) {
                             stories.forEach { story ->
-                                Log.d("MapsActivity", "story: $story")
+                                Log.d(TAG, "story: $story")
                                 val latLng = LatLng(story.lat ?: 0.0, story.lon ?: 0.0)
                                 mMap.addMarker(
                                     MarkerOptions()
@@ -117,6 +119,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = true
 
         getMyLocation()
+        setMapStyle()
 
         val bounds: LatLngBounds = boundsBuilder.build()
         mMap.animateCamera(
@@ -147,5 +150,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
         }
+    }
+
+    private fun setMapStyle() {
+        try {
+            val success = mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.")
+            }
+        } catch (exception: Resources.NotFoundException) {
+            Log.e(TAG, "Can't find style. Error: ", exception)
+        }
+    }
+
+    companion object {
+        private const val TAG = "MapsActivity"
     }
 }
