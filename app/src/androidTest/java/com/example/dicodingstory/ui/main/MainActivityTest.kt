@@ -12,9 +12,11 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import com.example.dicodingstory.R
 import com.example.dicodingstory.ui.login.LoginActivity
 import com.example.dicodingstory.utils.EspressoIdlingResource
+import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -52,6 +54,7 @@ class MainActivityTest {
         onView(withId(R.id.button_login)).check(matches(isDisplayed())).perform(click())
 
         onView(withId(R.id.action_logout)).check(matches(isDisplayed())).perform(click())
+        onView(allOf(withId(android.R.id.button1), withText("Logout"))).perform(click())
 
         onView(withId(R.id.tv_welcome_title)).check(matches(isDisplayed()))
     }

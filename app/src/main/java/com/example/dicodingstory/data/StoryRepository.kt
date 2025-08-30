@@ -18,6 +18,7 @@ import com.example.dicodingstory.data.remote.response.StoryErrorResponse
 import com.example.dicodingstory.data.remote.response.StoryLoginResponse
 import com.example.dicodingstory.data.remote.retrofit.ApiService
 import com.example.dicodingstory.utils.AppExecutors
+import com.example.dicodingstory.utils.EspressoIdlingResource
 import com.example.dicodingstory.utils.UserPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
@@ -34,6 +35,7 @@ class StoryRepository private constructor(
 ) {
     fun loginAccount(email: String, password: String, errorMessage: String): LiveData<Result<StoryLoginResponse>> = liveData {
         emit(Result.Loading)
+        EspressoIdlingResource.increment()
         try {
             val response = apiService.loginAccount(email, password)
             val loginResult = response.loginResult
@@ -55,6 +57,8 @@ class StoryRepository private constructor(
             val errorBody = Gson().fromJson(jsonInString, StoryErrorResponse::class.java)
             val errorMessage = errorBody.message
             emit(Result.Error(errorMessage.toString()))
+        } finally {
+            EspressoIdlingResource.decrement()
         }
     }
 
