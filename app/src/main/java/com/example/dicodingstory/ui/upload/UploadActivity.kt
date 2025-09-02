@@ -2,8 +2,6 @@ package com.example.dicodingstory.ui.upload
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Address
-import android.location.Geocoder
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle

@@ -1,6 +1,5 @@
 package com.example.dicodingstory.data.remote.retrofit
 
-import androidx.lifecycle.MutableLiveData
 import com.example.dicodingstory.data.remote.response.ListStoryItem
 import com.example.dicodingstory.data.remote.response.LoginResult
 import com.example.dicodingstory.data.remote.response.StoryErrorResponse

@@ -32,10 +32,6 @@ class FakeUserPreferences : UserPreferencesContract {
         _sessionToken.value = token
     }
 
-    fun setLanguageSetting(language: String) {
-        _languageSetting.value = language
-    }
-
     fun clearAll() {
         _sessionToken.value = null
         _languageSetting.value = "en"

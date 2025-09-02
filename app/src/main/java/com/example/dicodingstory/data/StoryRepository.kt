@@ -13,7 +13,6 @@ import com.example.dicodingstory.data.local.entity.AccountEntity
 import com.example.dicodingstory.data.local.entity.StoryEntity
 import com.example.dicodingstory.data.local.room.StoryDao
 import com.example.dicodingstory.data.local.room.StoryDatabase
-import com.example.dicodingstory.data.remote.response.ListStoryItem
 import com.example.dicodingstory.data.remote.response.StoryErrorResponse
 import com.example.dicodingstory.data.remote.response.StoryLoginResponse
 import com.example.dicodingstory.data.remote.retrofit.ApiService

@@ -12,7 +12,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import com.example.dicodingstory.R
 import com.example.dicodingstory.ui.login.LoginActivity
 import com.example.dicodingstory.utils.EspressoIdlingResource
