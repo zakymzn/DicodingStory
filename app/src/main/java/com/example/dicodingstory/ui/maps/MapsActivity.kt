@@ -35,14 +35,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val toolbar = binding.materialToolbar
 
-        val myPoint = LatLng(-7.692545396855993, 109.67624793606501)
+//        val myPoint = LatLng(-7.692545396855993, 109.67624793606501)
 
         val mapsViewModelFactory: MapsViewModelFactory = MapsViewModelFactory.getInstance(this@MapsActivity)
         val mapsViewModel: MapsViewModel by viewModels {
             mapsViewModelFactory
         }
 
-        boundsBuilder.include(myPoint)
+//        boundsBuilder.include(myPoint)
 
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -94,6 +94,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         .snippet(story.description)
                                 )
                                 boundsBuilder.include(latLng)
+
+                                val bounds: LatLngBounds = boundsBuilder.build()
+                                mMap.animateCamera(
+                                    CameraUpdateFactory.newLatLngBounds(
+                                        bounds,
+                                        resources.displayMetrics.widthPixels,
+                                        resources.displayMetrics.heightPixels,
+                                        300
+                                    )
+                                )
                             }
                         }
                     }
@@ -120,16 +130,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         getMyLocation()
         setMapStyle()
-
-        val bounds: LatLngBounds = boundsBuilder.build()
-        mMap.animateCamera(
-            CameraUpdateFactory.newLatLngBounds(
-                bounds,
-                resources.displayMetrics.widthPixels,
-                resources.displayMetrics.heightPixels,
-                300
-            )
-        )
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
