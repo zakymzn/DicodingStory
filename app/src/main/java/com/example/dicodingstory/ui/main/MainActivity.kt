@@ -6,14 +6,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dicodingstory.R
-import com.example.dicodingstory.data.Result
 import com.example.dicodingstory.databinding.ActivityMainBinding
 import com.example.dicodingstory.ui.maps.MapsActivity
 import com.example.dicodingstory.ui.settings.SettingsActivity
@@ -116,6 +115,16 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getAllStories().observe(this, {
             mainAdapter.submitData(lifecycle, it)
         })
+
+        lifecycleScope.launch {
+            mainAdapter.loadStateFlow.collect { loadState ->
+                val isListEmpty = loadState.refresh is LoadState.NotLoading && mainAdapter.itemCount == 0
+                ivNoData.visibility = if (isListEmpty) View.VISIBLE else View.GONE
+                tvNoData.visibility = if (isListEmpty) View.VISIBLE else View.GONE
+                rvStoryList.visibility = if (isListEmpty) View.GONE else View.VISIBLE
+
+            }
+        }
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
