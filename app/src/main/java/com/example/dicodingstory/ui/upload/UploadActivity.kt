@@ -84,8 +84,16 @@ class UploadActivity : AppCompatActivity() {
                 Log.d("Image File", "showImage: ${imageFile.path}")
 
                 val requestBodyDesc = description.toRequestBody("text/plain".toMediaType())
-                val latRequestBody = latitude.toString().toRequestBody("text/plain".toMediaType())
-                val lonRequestBody = longitude.toString().toRequestBody("text/plain".toMediaType())
+                val latRequestBody = if (latitude != null && longitude != null) {
+                    latitude.toString().toRequestBody("text/plain".toMediaType())
+                } else {
+                    null
+                }
+                val lonRequestBody = if (latitude != null && longitude != null) {
+                    longitude.toString().toRequestBody("text/plain".toMediaType())
+                } else {
+                    null
+                }
                 val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
                 val multipartBody = MultipartBody.Part.createFormData(
                     "photo",
@@ -99,7 +107,7 @@ class UploadActivity : AppCompatActivity() {
                             is Result.Loading -> {
                                 pbUpload.visibility = View.VISIBLE
                             }
-                            
+
                             is Result.Success -> {
                                 pbUpload.visibility = View.GONE
                                 val response = result.data
@@ -114,7 +122,7 @@ class UploadActivity : AppCompatActivity() {
                                     Toast.makeText(this, "Error : ${response.message}", Toast.LENGTH_SHORT).show()
                                 }
                             }
-                            
+
                             is Result.Error -> {
                                 pbUpload.visibility = View.GONE
                                 Toast.makeText(this, "Error : ${result.error}", Toast.LENGTH_SHORT).show()

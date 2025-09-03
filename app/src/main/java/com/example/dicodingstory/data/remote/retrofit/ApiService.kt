@@ -38,6 +38,6 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("location") location: Boolean = false,
+        @Query("location") location: Int? = null,
     ): StoryListResponse
 }

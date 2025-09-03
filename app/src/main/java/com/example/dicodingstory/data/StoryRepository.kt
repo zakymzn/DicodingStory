@@ -98,7 +98,7 @@ class StoryRepository private constructor(
         }
 
         try {
-            val response = apiService.getAllStories("Bearer $token", location = true)
+            val response = apiService.getAllStories("Bearer $token", location = 1)
             val stories = response.listStory
             val storyList = stories.map { story ->
                 StoryEntity(
@@ -124,7 +124,7 @@ class StoryRepository private constructor(
         emitSource(localData)
     }
 
-    fun addNewStory(file: MultipartBody.Part, description: RequestBody, lat: RequestBody? = null, lon: RequestBody? = null, errorMessage: String): LiveData<Result<StoryErrorResponse>> = liveData {
+    fun addNewStory(file: MultipartBody.Part, description: RequestBody, lat: RequestBody?, lon: RequestBody?, errorMessage: String): LiveData<Result<StoryErrorResponse>> = liveData {
         emit(Result.Loading)
         val token = session.getSessionToken().first()
 
